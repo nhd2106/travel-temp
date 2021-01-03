@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HotelTypes = styled.div`
+export default HotelTypes = styled.div`
   ul {
     list-style: none;
     padding-inline-start: unset;
@@ -32,7 +32,7 @@ export const HotelTypes = styled.div`
     }
   }
 `;
-export const TraiNghiemStyles = styled.div`
+export default TraiNghiemStyles = styled.div`
   min-height: 76vh;
   width: 90%;
   margin: 3rem auto;
@@ -105,7 +105,7 @@ export const TraiNghiemStyles = styled.div`
   }
 `;
 
-export const LienHeStyles = styled.div`
+export default LienHeStyles = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -161,7 +161,7 @@ export const LienHeStyles = styled.div`
   }
 `;
 
-export const BlogStyles = styled.div`
+export default BlogStyles = styled.div`
   img {
     width: 100%;
     height: 100%;
@@ -170,7 +170,7 @@ export const BlogStyles = styled.div`
     width: 100%;
   }
 `;
-export const BlogCover = styled.div`
+export default BlogCover = styled.div`
   .cover {
     background: url(${(props) => {
       return `${props.coverUrl}`;

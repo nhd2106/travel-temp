@@ -8,7 +8,9 @@ body {
   box-sizing: border-box;
   position: relative;
 }
-
+::after, ::before {
+  box-sizing: inherit;
+}
 a {
   color: inherit;
   text-decoration: none;
@@ -33,7 +35,7 @@ a {
 .slick-prev::before {
   font-size: 50px !important;
   /* box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1), 0px 20px 20px rgba(0, 0, 0, 0.1); */
-  /* color: rgba(0, 0, 0, 0.2) !important; */
+  color: #F78F1E !important;
 }
 
 .slick-next {
@@ -42,7 +44,7 @@ a {
 .slick-next::before {
   font-size: 50px !important;
   /* box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1), 0px 20px 20px rgba(0, 0, 0, 0.1); */
-  /* color: rgba(0, 0, 0, 0.2) !important; */
+  color: #F78F1E !important;
 
 
 

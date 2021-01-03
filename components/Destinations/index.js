@@ -43,6 +43,7 @@ export default function Destinations(props) {
 
   return (
     <DestinationsStyled>
+      <h1 style={{ marginBottom: '1rem' }}>Điểm đến phổ biến</h1>
       <Slider {...settings}>
         <Link href="/">
           <a className="destination">

@@ -22,7 +22,7 @@ export default function Post() {
   }, [postDetails]);
   const coverUrl = url ? `http://localhost:1337${url}` : "";
   const SEO = {
-    title: postDetails.title || "",
+    title: postDetails ? postDetails.title : '',
   };
   return (
     <>

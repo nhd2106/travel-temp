@@ -16,6 +16,7 @@ import { FacebookShareButton, FacebookIcon, FacebookMessengerShareButton, Facebo
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
+    margin:'1rem 2rem'
   },
   media: {
     height: 0,
@@ -63,6 +64,7 @@ export default function MediaCard({ image, title, description, id }) {
               variant="body2"
               color="textSecondary"
               component="p"
+              noWrap
             >
               {description}
             </Typography>

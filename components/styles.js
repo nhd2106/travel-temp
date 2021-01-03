@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NavigationsStyled = styled.div`
+export default NavigationsStyled = styled.div`
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -11,7 +11,7 @@ export const NavigationsStyled = styled.div`
       cursor: pointer;
     }
   }
-  .brand {
+  .brand 
     cursor: pointer;
     background-color: white;
     border-radius: 50%;
@@ -34,7 +34,7 @@ export const NavigationsStyled = styled.div`
   }
 `;
 
-export const DestinationsStyled = styled.div`
+export default DestinationsStyled = styled.div`
   margin-bottom: 1.5rem;
   .destination {
     display: flex;
@@ -74,7 +74,7 @@ export const DestinationsStyled = styled.div`
   }
 `;
 
-export const FooterStyles = styled.div`
+export default FooterStyles = styled.div`
   background: #1ba0e2;
   // height: 45vh;
   color: white;
@@ -88,7 +88,7 @@ export const FooterStyles = styled.div`
     border-bottom: 1px solid #3face2;
     .right {
       display: flex;
-      flex: 3 1 40rem;
+      flex: 3 1 20rem;
       flex-wrap: wrap;
       justify-content: space-between;
       .helps {
@@ -101,7 +101,7 @@ export const FooterStyles = styled.div`
       }
     }
     .left {
-      flex: 1 1 40rem;
+      flex: 1 1 20rem;
       span {
         color: #bae2f6;
         margin-top: 1rem;
@@ -128,7 +128,7 @@ export const FooterStyles = styled.div`
   }
 `;
 
-export const SignInStyles = styled.div`
+export default SignInStyles = styled.div`
   display: flex !important;
   justify-content: center !important;
   flex-direction: column;

@@ -4,6 +4,7 @@ import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import Destinations from "../components/Destinations";
 import Carousel from "../components/Carousel";
+import Promotions from '../components/Promotions';
 
 import { HotelTypes } from "./styles";
 export default function Home() {
@@ -31,6 +32,7 @@ export default function Home() {
           }}
         >
           <Destinations />
+          <Promotions/>
           <HotelTypes>
             <h1>Luôn phù hợp</h1>
             <div>
