@@ -4,7 +4,7 @@ import PriceCards from "../PriceCard";
 
 
 const PromotionStyle = styled.div`
-  
+  margin-bottom: 3rem;
 `
 
 const Promotions = () => {
@@ -42,7 +42,7 @@ const Promotions = () => {
     ]
   };
   return (
-    <>
+    <PromotionStyle>
       <div>
         <h1>Ưu đãi hấp dẫn</h1>
       </div>
@@ -55,7 +55,7 @@ const Promotions = () => {
             <PriceCards/> 
           </Slider>
       </div>
-    </>
+    </PromotionStyle>
   );
 };
 

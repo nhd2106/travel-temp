@@ -28,6 +28,7 @@ const useStyles = makeStyles({
   flex-direction: column;
   align-items: center;
   text-align: center;
+  margin-bottom: 3rem;
   .form-wraper {
     width: 100%;
     max-width: 450px;
