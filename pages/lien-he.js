@@ -8,9 +8,65 @@ import {
   Hidden,
   TextareaAutosize,
 } from "@material-ui/core";
-import { LienHeStyles } from "./styles";
+import styled from 'styled-components';
 
 import { NextSeo } from 'next-seo';
+
+export const LienHeStyles = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(rgba(255, 255, 255, 0.5), transparent),
+    url("/relaxing.jpg");
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  .form-wrapper {
+    min-height: 70vh;
+    min-width: 60vw;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 1rem;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1),
+      0px 20px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    alin-items: center;
+    .right,
+    .left {
+      text-align: center;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+    .left {
+      flex: 1 1 20rem;
+    }
+    .right {
+      flex: 3 1 20rem;
+    }
+    svg {
+      height: 15rem;
+      width: 100%;
+    }
+  }
+  @media screen and (max-width: 599px) {
+    .form-wrapper {
+      min-height: 60vh;
+      min-width: 95vw;
+      background: rgba(255, 255, 255, 0.5);
+    }
+    .button-submit {
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+`;
 
 export default function LienHe(props) {
   const SEO = {

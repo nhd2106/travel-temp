@@ -12,7 +12,7 @@ import {
     Hidden
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { SignInStyles } from '../styles';
+import styled from 'styled-components';
 
 const useStyles = makeStyles({
     root: {
@@ -22,7 +22,26 @@ const useStyles = makeStyles({
     },
     
   });
-
+  const SignInStyles = styled.div`
+  display: flex !important;
+  justify-content: center !important;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  .form-wraper {
+    width: 100%;
+    max-width: 450px;
+  }
+  .top-sign-in {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .MuiFormControl-root {
+      width: 100%;
+    }
+  }
+`;
 export default function SignUp() {
     const classes = useStyles()
     return (

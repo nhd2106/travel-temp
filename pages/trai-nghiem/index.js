@@ -1,12 +1,85 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MediaCard from "../../components/Card";
-import { TraiNghiemStyles } from "../styles";
+import styled from 'styled-components';
 
 import Slider from "react-slick";
 import { NextSeo } from "next-seo";
 
 import { handlerGetPosts } from "../../redux/actions/blog";
+
+export const TraiNghiemStyles = styled.div`
+  min-height: 76vh;
+  width: 90%;
+  margin: 3rem auto;
+  .top-images {
+    height: 100%;
+    width: 100%;
+    min-height: 76vh;
+    display: flex;
+    alig-items: center;
+    .text {
+      flex: 1 1 40rem;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .image {
+      flex: 4 1 100rem;
+      // background: url("/trainghiemimages.jpg");
+      // width: 100%;
+      // height: 100%;
+      // background-position: center;
+      // background-size: cover;
+      // background-repeat: no-repeat;
+      // min-height: 76vh;
+      svg {
+        width: 100%;
+      }
+    }
+    margin-bottom: 7rem;
+  }
+  .card-wrapper {
+    margin-top: 5rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .MuiTypography-h5,
+  .MuiTypography-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .MuiCardHeader-content {
+    overflow: hidden;
+  }
+  @media screen and (max-width: 599px) {
+    margin: 3rem auto;
+    .card-wrapper {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    .top-images {
+      flex-direction: column;
+      min-height: 50vh;
+      margin-bottom: 3rem;
+
+      .text,
+      .image {
+        flex: unset;
+      }
+      svg {
+        height: 15rem;
+      }
+    }
+  }
+  @media screen and (min-width: 600px, max-width: 1024px) {
+    .card-wrapper {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+`;
 
 export default function TraiNghiem(props) {
   const posts = useSelector(({ blog }) => blog.posts);

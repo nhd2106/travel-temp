@@ -1,7 +1,47 @@
 import Link from "next/link";
 import Slider from "react-slick";
 
-import { DestinationsStyled } from "../styles";
+import styled from 'styled-components';
+
+const DestinationsStyled = styled.div`
+  margin-bottom: 1.5rem;
+  .destination {
+    display: flex;
+    text-decoration: none;
+    color: black;
+    jutify-content: center;
+    align-items: center;
+    img {
+      width: 64px;
+      height: 64px;
+    }
+    margin-bottom: 10px;
+  }
+  // .slick-slide {
+    
+  // }
+  @media screen and (max-width: 599px) {
+    img {
+      width: 100%;
+    }
+    .slick-slide {
+      span: nth-child(1) {
+
+      }
+    }
+    .slick-next {
+      right: -30px !important;
+      opacity: 1;
+    }
+    .slick-prev {
+      left: -30px !important;
+      opacity: 1;
+    }
+    .slick-next::before {
+      opacity: 0.75 !important;
+    }
+  }
+`;
 
 export default function Destinations(props) {
   const settings = {

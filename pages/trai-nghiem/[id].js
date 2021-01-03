@@ -4,9 +4,40 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { Container } from "@material-ui/core";
 
-import { BlogStyles, BlogCover } from "../styles";
+import styled from 'styled-components';
 
 import { handlerGetPostDetails } from "../../redux/actions/blog";
+
+ const BlogStyles = styled.div`
+  img {
+    width: 100%;
+    height: 100%;
+  }
+  iframe {
+    width: 100%;
+  }
+`;
+ const BlogCover = styled.div`
+  .cover {
+    background: url(${(props) => {
+      return `${props.coverUrl}`;
+    }});
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    min-height: 70vh;
+    margin-bottom: 3rem;
+  }
+
+  @media screen and (max-width: 599px) {
+    .cover {
+      min-height: 20vh;
+    }
+  }
+`;
+
 
 export default function Post() {
   const router = useRouter();

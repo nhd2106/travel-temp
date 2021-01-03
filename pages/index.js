@@ -1,12 +1,44 @@
 import Head from "next/head";
 import Link from "next/link";
-
+import styled from 'styled-components';
 import styles from "../styles/Home.module.css";
 import Destinations from "../components/Destinations";
 import Carousel from "../components/Carousel";
 import Promotions from '../components/Promotions';
 
-import { HotelTypes } from "./styles";
+const HotelTypes = styled.div`
+  ul {
+    list-style: none;
+    padding-inline-start: unset;
+  }
+  a {
+    color: black;
+    text-decoration: none;
+    text-align: center;
+  }
+  .wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1rem;
+    span {
+      font-weight: bold;
+    }
+  }
+  img {
+    width: 100%;
+    border-radius: 1rem;
+  }
+  span {
+    font-size: calc(1vw + 0.8rem);
+  }
+  @media screen and (max-width: 599px) {
+    .wrapper {
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+
+    }
+  }
+`;
+
 export default function Home() {
   return (
     <div>
