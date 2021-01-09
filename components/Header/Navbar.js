@@ -20,10 +20,12 @@ import Container from "@material-ui/core/Container";
 import DDrawer from "./Drawer";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useDispatch, useSelector } from "react-redux";
-import { signOutHandler } from '../../redux/actions/user';
+import { signOutHandler } from "../../redux/actions/user";
 
-import { auth as googleAuth } from '../../utils/firebase/firebase.utils';
+import { auth as googleAuth } from "../../utils/firebase/firebase.utils";
+import { Badge } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -78,14 +80,14 @@ export default function DNavbar({ navigations }) {
     setOpen(open);
   };
   const dispatch = useDispatch();
-  const user = useSelector(({  user }) => user.user);
+  const user = useSelector(({ user }) => user.user);
   const signOut = () => {
-    window.localStorage.clear()
+    window.localStorage.clear();
     googleAuth.signOut();
     dispatch(signOutHandler());
     handleClose();
   };
-  
+
   return (
     <>
       <AppBar position="sticky" style={{ background: "#1BA0E2" }}>
@@ -110,7 +112,7 @@ export default function DNavbar({ navigations }) {
             <div
               style={{
                 flex: " 1 1 40rem",
-                display: 'flex',
+                display: "flex",
                 alignItems: "center",
               }}
             >
@@ -156,8 +158,25 @@ export default function DNavbar({ navigations }) {
                 })}
               </Grid>
             </Grid>
+            <Tooltip title="Giỏ hàng">
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                color="inherit"
+                onClick={() => router.push("/cart")}
+              >
+                <Badge badgeContent={4} color="secondary">
+                  <ShoppingCartIcon />
+                </Badge>
+              </IconButton>
+            </Tooltip>
             {user ? (
-              <div>
+              <div
+                style={{
+                  display: "flex",
+                }}
+              >
                 <Tooltip title="xem thông tin">
                   <IconButton
                     aria-label="account of current user"
@@ -185,10 +204,18 @@ export default function DNavbar({ navigations }) {
                   onClose={handleClose}
                 >
                   <MenuItem onClick={handleClose}>Tài khoản</MenuItem>
-                  <MenuItem onClick={() => handleRouter('http://localhost:1337/admin')}>Quản lý</MenuItem>
-                  <MenuItem onClick={() => {
-                    signOut()
-                  }}>Đăng xuất</MenuItem>
+                  <MenuItem
+                    onClick={() => handleRouter("http://localhost:1337/admin")}
+                  >
+                    Quản lý
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      signOut();
+                    }}
+                  >
+                    Đăng xuất
+                  </MenuItem>
                 </Menu>
               </div>
             ) : (
@@ -219,8 +246,12 @@ export default function DNavbar({ navigations }) {
                   open={openMenu}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={() => handleRouter('/dang-nhap')}>Đăng nhập</MenuItem>
-                  <MenuItem onClick={() => handleRouter('/dang-ky')}>Đăng ký</MenuItem>
+                  <MenuItem onClick={() => handleRouter("/dang-nhap")}>
+                    Đăng nhập
+                  </MenuItem>
+                  <MenuItem onClick={() => handleRouter("/dang-ky")}>
+                    Đăng ký
+                  </MenuItem>
                 </Menu>
               </div>
             )}

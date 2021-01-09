@@ -16,7 +16,7 @@ import Waiting from "../components/Waiting";
 
 import SEO from "../next-seo.config";
 import { wrapper } from "../store";
-import { signInHandler } from '../redux/actions/user';
+import { signInHandler } from "../redux/actions/user";
 
 const useStyles = makeStyles({
   button: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 function App({ Component, pageProps }) {
   const [is_visible, setIs_visible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const user = useSelector(({ user } ) => user.user );
+  const user = useSelector(({ user }) => user.user);
   const dispatch = useDispatch();
   Router.events.on("routeChangeStart", () => {
     setIsLoading(true);
@@ -56,17 +56,17 @@ function App({ Component, pageProps }) {
     });
   };
   useEffect(() => {
-    const jssStyles = document.querySelector('#jss-server-side');
-      if (jssStyles) {
-        jssStyles.parentElement.removeChild(jssStyles);
-   }  
+    const jssStyles = document.querySelector("#jss-server-side");
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles);
+    }
     document.addEventListener("scroll", function (e) {
       toggleVisibility();
     });
-   if(!user) {
-     const localUser = JSON.parse(window.localStorage.getItem('user'));
-     if(localUser) dispatch(signInHandler(localUser));
-   }
+    if (!user) {
+      const localUser = JSON.parse(window.localStorage.getItem("user"));
+      if (localUser) dispatch(signInHandler(localUser));
+    }
   }, []);
   const classes = useStyles();
   return (
@@ -86,7 +86,7 @@ function App({ Component, pageProps }) {
         <DefaultSeo {...SEO} />
         {isLoading ? <Waiting fullscreen type="WindMillLoading" /> : null}
         {/* { isLoading ? <Loader color="#fff" type="cylon" /> : null } */}
-        <Header user = {user}/>
+        <Header user={user} />
 
         <Component {...pageProps} />
         {is_visible ? (

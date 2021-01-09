@@ -6,6 +6,10 @@ import Destinations from "../components/Destinations";
 import Carousel from "../components/Carousel";
 import Promotions from '../components/Promotions';
 
+import { handlerProducts } from '../redux/actions/products';
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+
 const HotelTypes = styled.div`
   ul {
     list-style: none;
@@ -40,6 +44,11 @@ const HotelTypes = styled.div`
 `;
 
 export default function Home() {
+  const dispatch = useDispatch();
+  const products = useSelector(({ products }) => products.products );
+  useEffect(() => {
+    dispatch(handlerProducts())
+  }, [])
   return (
     <div>
       <Head>

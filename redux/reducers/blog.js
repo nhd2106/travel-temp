@@ -4,7 +4,7 @@ const initialState = {
   postDetails: {},
 };
 
-export default function user(state = initialState, action) {
+export default function blog(state = initialState, action) {
   const { posts, postDetails } = action;
   switch (action.type) {
     case BLOG.handlers.get:
