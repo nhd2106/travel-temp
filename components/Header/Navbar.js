@@ -137,7 +137,7 @@ export default function DNavbar({ navigations }) {
             >
               <Grid item lg={9}>
                 {[
-                  { title: "Khách sạn", slug: "/khach-san" },
+                  { title: "Khách sạn", slug: "/hotels" },
                   { title: "Địa điểm", slug: "/dia-diem" },
                   { title: "Trải nghiệm", slug: "/trai-nghiem" },
                   { title: "Liên hệ", slug: "/lien-he" },

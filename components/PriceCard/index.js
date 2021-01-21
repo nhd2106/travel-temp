@@ -2,6 +2,8 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 
+import {  numberFormatter } from '../../libs/utils';
+
 const PriceCardStyle = styled.div`
     margin: 2rem 1rem;
     .card-wrapper {
@@ -38,26 +40,26 @@ const PriceCardStyle = styled.div`
     }   
 `
 
-const PriceCards = () => {
+const PriceCards = ({ title, price, urlImage }) => {
     return (
         <PriceCardStyle>
-            <Link href='/'>
+            <Link href="/hotels/[id]" >
                 <a>
                     <div className='card-wrapper'>
                     <div className='box'>
-                    <img src="/sonesea.jpg" />
+                    <img src={`http://localhost:1337${urlImage}`} width="100%" height="100%" />
                     <div className='description'>
-                        <h3>title</h3>
+                        <h3>{title}</h3>
                         <div className='number'>
                             <div className='count'>
                                 số người mua
                             </div>
                             <div className='price'>
                                 <div className='old-price'>
-                                    5000000 đ
+                                    {numberFormatter.format(price * 1.25)} đ
                                 </div>
                                 <div className='new-price'>
-                                    giá mới
+                                    {numberFormatter.format(price)} đ
                                 </div>
                             </div>
                         </div>

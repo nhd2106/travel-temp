@@ -1,18 +1,18 @@
-import { PRODUCT } from "../constants";
+import { CART } from "../constants";
 const initialState = {
-  products: {},
+  products: [],
   productDetails: {},
 };
 
-export default function product(state = initialState, action) {
+export default function cart(state = initialState, action) {
   const { products, productDetails } = action;
   switch (action.type) {
-    case PRODUCT.handlers.get:
+    case CART.handlers.add:
       return {
         ...state,
         handling: true,
       };
-    case PRODUCT.update:
+    case CART.update:
       return {
         ...state,
         products,

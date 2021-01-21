@@ -67,6 +67,7 @@ function App({ Component, pageProps }) {
       const localUser = JSON.parse(window.localStorage.getItem("user"));
       if (localUser) dispatch(signInHandler(localUser));
     }
+    
   }, []);
   const classes = useStyles();
   return (
