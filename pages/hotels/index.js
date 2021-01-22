@@ -8,6 +8,7 @@ import { useEffect } from "react";
 
 
 import PriceCard from '../../components/PriceCard';
+import Skeleton from '../../components/Skeleton';
 
 import { handlerProducts } from '../../redux/actions/products';
 
@@ -48,7 +49,7 @@ export default function Hotels(props) {
     title: "Khách sạn",
   };
   const classes = useStyles();
-
+  
   return (
     <div
       style={{
@@ -81,7 +82,7 @@ export default function Hotels(props) {
                   }) => <Grid lg={4} sm={4} xs={12}>
                   <PriceCard className='card-style' title={title} price={price} urlImage={url}/>
               </Grid>)
-                ) : null
+                ) : <Grid lg={4} sm={4} xs={12}><Skeleton/></Grid>
               }
           </Grid>
         </Grid>
