@@ -121,7 +121,7 @@ export default function DNavbar({ navigations }) {
                   style={{
                     textDecoration: "none",
                     color: "white",
-                    fontSize: "calc(1rem + 1vw)",
+                    fontSize: "calc(0.7rem + 1vw)",
                   }}
                 >
                   Lux Journey
