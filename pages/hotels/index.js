@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
   AccordionWrapper: {
     width: "100%",
-    paddingRight: "1rem",
+    // paddingRight: "1rem",
   },
 }));
 
@@ -64,7 +64,7 @@ const HotelsStyles = styled.div`
   }
   .MuiFormControl-root {
     width: 100%;
-    padding-right: 1rem;
+    // padding-right: 1rem;
   }
 `;
 export default function Hotels(props) {
@@ -105,7 +105,7 @@ export default function Hotels(props) {
         <NextSeo {...SEO} />
         <Grid container>
           <Grid lg={3} sm={3} xs={12} container>
-            <div>
+            <div style={{width: '90%'}}>
               <h4>Tìm kiếm khách sạn</h4>
               <form noValidate autoComplete="off">
                 <TextField id="standard-basic" label="Bạn muốn đi đâu?" />
@@ -186,7 +186,6 @@ export default function Hotels(props) {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="hotelTypes"
                     id="hotelTypes"
-                    F
                   >
                     <Typography className={classes.heading}>
                       Loại khách sạn
