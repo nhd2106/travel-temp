@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function product(props) {
+const hotel = (props) => {
     
 
     return (
@@ -9,3 +9,5 @@ export function product(props) {
         </>
     )
 }
+
+export default hotel;
