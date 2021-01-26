@@ -302,11 +302,12 @@ export default function TraiNghiem(props) {
             <Slider {...settings}>
               {posts.map((post) => {
                 const {
-                  og_img: { url },
+                  og_img,
                   id,
                   title,
                   shortDesc,
                 } = post || "";
+                const { url } = og_img || ''
                 return (
                   <MediaCard
                     key={id}
@@ -326,11 +327,12 @@ export default function TraiNghiem(props) {
             <Slider {...settings}>
               {posts.map((post) => {
                 const {
-                  og_img: { url },
+                  og_img,
                   id,
                   title,
                   shortDesc,
                 } = post || "";
+                const { url } = og_img || '';
                 return (
                   <MediaCard
                     key={id}
@@ -350,11 +352,12 @@ export default function TraiNghiem(props) {
             <Slider {...settings}>
               {posts.map((post) => {
                 const {
-                  og_img: { url },
+                  og_img,
                   id,
                   title,
                   shortDesc,
                 } = post || "";
+                const { url } = og_img || '';
                 return (
                   <MediaCard
                     image={`http://localhost:1337${url}`}
@@ -374,11 +377,12 @@ export default function TraiNghiem(props) {
             <Slider {...settings}>
               {posts.map((post) => {
                 const {
-                  og_img: { url },
+                  og_img,
                   id,
                   title,
                   shortDesc,
                 } = post || "";
+                const { url } = og_img || '';
                 return (
                   <MediaCard
                     key={id}

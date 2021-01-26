@@ -2,6 +2,9 @@ import { put, takeLatest, all, call } from "redux-saga/effects";
 
 import { BLOG } from "../constants";
 import { fetchStrapi } from "../../utils/callStrapi";
+import {
+  graphQLCaller
+} from '../../libs/backend';
 
 function* fetchPosts() {
   try {
@@ -13,6 +16,30 @@ function* fetchPosts() {
   } catch (error) {
     console.log(error);
   }
+}
+
+export function* queryPosts  () {
+  try {
+    const { posts } = yield graphQLCaller('posts', `query {
+      posts {
+        title,
+        content,
+        where,
+        shortDesc,
+        og_img {
+          url
+        },
+        id
+      }
+    }`)
+    yield put({
+      type: BLOG.update,
+      posts,
+    });
+  } catch (error) {
+    console.log(error)
+  }
+  
 }
 
 function* fetchPostDetails({ id }) {
@@ -27,6 +54,7 @@ function* fetchPostDetails({ id }) {
   }
 }
 
+
 export const handlerGetPosts = () => ({
   type: BLOG.handlers.get,
 });
@@ -37,7 +65,8 @@ export const handlerGetPostDetails = (id) => ({
 
 export default function* saga() {
   yield all([
-    yield takeLatest(BLOG.handlers.get, fetchPosts),
+    // yield takeLatest(BLOG.handlers.get, fetchPosts),
+    yield takeLatest(BLOG.handlers.get, queryPosts),
     yield takeLatest(BLOG.handlers.getDetails, fetchPostDetails),
   ]);
 }
