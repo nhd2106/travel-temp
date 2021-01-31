@@ -42,12 +42,12 @@ import { handlerGetPostDetails } from "../../redux/actions/blog";
 export default function Post() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { id } = router.query;
+  const { slug } = router.query;
   const postDetails = useSelector(({ blog }) => blog.postDetails);
   const { url } = postDetails && postDetails.og_img ? postDetails.og_img : "";
   useEffect(() => {
-    dispatch(handlerGetPostDetails(id));
-  }, [id]);
+    dispatch(handlerGetPostDetails(slug));
+  }, [slug]);
   const render = useMemo(() => {
     if (postDetails) return { __html: postDetails.content };
   }, [postDetails]);

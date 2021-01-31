@@ -66,7 +66,7 @@ export default function SignIn() {
         })
       }, [user])
     const classes = useStyles();
-    const handleSign = async () => {
+    const handleSign = async (mode) => {
         await SignInWithGoogle();
         router.push('/');
     }
@@ -85,8 +85,8 @@ export default function SignIn() {
                         <TextField  style={{ marginBottom: '20px' }} id="outlined-basic " label="Tên người dùng" variant="outlined" />
                         <TextField style={{ marginBottom: '20px' }} id="outlined-basic" label="Mật khẩu" variant="outlined" />
                         <FormControlLabel control={<Checkbox />} label="Ghi nhớ đăng nhập"/>
-                        <Button style={{width:'100%',background: '#3B8AD9', color: 'white', marginBottom: '1rem'}}>Đăng nhập</Button>
-                        <Button onClick={() => handleSign()} style={{width:'100%',background: 'red', color: 'white'}}>Đăng nhập với google</Button>
+                        <Button on style={{width:'100%',background: '#3B8AD9', color: 'white', marginBottom: '1rem'}}>Đăng nhập</Button>
+                        <Button onClick={() => handleSign('goole')} style={{width:'100%',background: 'red', color: 'white'}}>Đăng nhập với google</Button>
                         </form>
                     </div>
                 </SignInStyles>

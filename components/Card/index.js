@@ -37,12 +37,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MediaCard({ image, title, description, id }) {
+export default function MediaCard({ image, title, description, slug }) {
   const classes = useStyles();
 
   return (
     <Card className={classes.root}>
-      <Link href="/trai-nghiem/[id]" as={`trai-nghiem/${id}`}>
+      <Link href="/trai-nghiem/[slug]" as={`trai-nghiem/${slug}`}>
         <a>
           <CardHeader
             action={

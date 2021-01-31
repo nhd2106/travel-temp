@@ -20,16 +20,15 @@ function* fetchPosts() {
 
 export function* queryPosts  () {
   try {
-    const { posts } = yield graphQLCaller('posts', `query {
+    const { posts } = yield graphQLCaller(`query {
       posts {
         title,
-        content,
         where,
         shortDesc,
         og_img {
           url
         },
-        id
+        slug
       }
     }`)
     yield put({
@@ -42,12 +41,33 @@ export function* queryPosts  () {
   
 }
 
-function* fetchPostDetails({ id }) {
+export function* queryPostDetail({ slug }) {
   try {
-    const { data: postDetails } = yield call(fetchStrapi, `posts/${id}`);
+    const { posts: postDetails } = yield graphQLCaller(`query{
+      posts(where:{ slug: "${slug}" }) {
+        og_img{
+          url
+        },
+        content
+      }
+    }`);
     yield put({
       type: BLOG.update,
-      postDetails,
+      postDetails: {...postDetails[0]},
+    });
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
+
+function* fetchPostDetails({ slug }) {
+  try {
+    const { data: postDetails } = yield call(fetchStrapi, `posts/?slug=${slug}`);
+    yield put({
+      type: BLOG.update,
+      postDetails: {...postDetails[0]},
     });
   } catch (error) {
     console.log(error);
@@ -58,15 +78,15 @@ function* fetchPostDetails({ id }) {
 export const handlerGetPosts = () => ({
   type: BLOG.handlers.get,
 });
-export const handlerGetPostDetails = (id) => ({
+export const handlerGetPostDetails = (slug) => ({
   type: BLOG.handlers.getDetails,
-  id,
+  slug,
 });
 
 export default function* saga() {
   yield all([
     // yield takeLatest(BLOG.handlers.get, fetchPosts),
     yield takeLatest(BLOG.handlers.get, queryPosts),
-    yield takeLatest(BLOG.handlers.getDetails, fetchPostDetails),
+    yield takeLatest(BLOG.handlers.getDetails, queryPostDetail),
   ]);
 }
