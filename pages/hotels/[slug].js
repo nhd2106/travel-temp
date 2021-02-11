@@ -9,7 +9,7 @@ import { Breadcrumbs } from '../../components/';
 import {
   HotelStyles,
   imageStyles
-} from './styles';
+} from '../../styles';
 
 import { handlerGetProductDetails } from "../../redux/actions/products";
 import { BACKEND } from '../../libs/config';
