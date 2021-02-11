@@ -1,12 +1,12 @@
 export default {
-    title : "Lux Journey",
+    title : "Yêu Vivu",
     description : 'DB created with nextjs and strapi',
-    titleTemplate : 'Lux Vacation | %s',
+    titleTemplate : 'Yêu Vivu | %s',
     openGraph: {
         type: 'website',
         locale: 'vi-vn',
         url : '',
-        site_name: 'Next blog',
+        site_name: 'Yêu ViVu',
         
     }
 }

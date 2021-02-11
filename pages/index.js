@@ -43,7 +43,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Lux Vacation</title>
+        <title>Yêu ViVu</title>
       </Head>
       <section className="imageCover">
         {/* <div className={styles.carousel}>
