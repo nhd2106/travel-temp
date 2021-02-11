@@ -1,6 +1,8 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
 import styled from "styled-components";
+import { handlerPromotionProduct } from "../../redux/actions/products";
 
 import PriceCards from "../PriceCard";
 
@@ -44,11 +46,10 @@ const Promotions = () => {
     ],
   };
   const products = useSelector(({ products }) => products.products);
-  console.log(products);
-  const promotionProducts = Object.keys(products).length
-    ? products.filter(({ promotion }) => promotion)
-    : [];
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(handlerPromotionProduct())
+  }, [])
   return (
     <PromotionStyle>
       <div>
@@ -56,11 +57,15 @@ const Promotions = () => {
       </div>
       <div>
         <Slider {...settings}>
-          {promotionProducts
-            ? promotionProducts.map(({ title, price, og_image: {
+          {products
+            ? products.map(({
+              slug,
+              title,
+              price,
+              og_image: {
               url
             } }, index) => (
-                <PriceCards title={title} price={price} key={index}  urlImage={url} />
+                <PriceCards slug={slug} title={title} price={price} key={index}  urlImage={url} />
               ))
             : null}
         </Slider>

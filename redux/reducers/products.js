@@ -1,6 +1,6 @@
 import { PRODUCT } from "../constants";
 const initialState = {
-  products: {},
+  products: [],
   productDetails: {},
 };
 

@@ -23,7 +23,7 @@ import {
   FavoriteBorder,
   Favorite,
 } from "@material-ui/icons";
-import { PriceCard, Skeleton } from "../../components";
+import { PriceCard, Skeleton, Breadcrumbs } from "../../components";
 
 import { handlerProducts } from "../../redux/actions/products";
 import {
@@ -96,13 +96,13 @@ export default function Hotels(props) {
   return (
     <div
       style={{
-        marginTop: "5rem",
+        marginBottom: "1rem",
         marginBottom: "5rem",
       }}
     >
-      <div></div>
       <HotelsStyles>
         <NextSeo {...SEO} />
+        <Breadcrumbs slugNTitle={[{ slug: '/hotels', title: "khách sạn" }]}/>
         <Grid container>
           <Grid lg={3} sm={3} xs={12} container>
             <div style={{width: '90%'}}>
@@ -333,14 +333,15 @@ export default function Hotels(props) {
             </div>
           </Grid>
           <Grid lg={9} sm={9} xs={12} container>
-            {Object.keys(products).length ? (
-              products.map(({ title, price, og_image: { url } }) => (
-                <Grid lg={4} sm={4} xs={12}>
+            {products && products.length ? (
+              products.map(({ title, price, slug, og_image: { url } }) => (
+                <Grid lg={4} sm={4} xs={12} key={slug}>
                   <PriceCard
                     className="card-style"
                     title={title}
                     price={price}
                     urlImage={url}
+                    slug={slug}
                   />
                 </Grid>
               ))

@@ -4,6 +4,7 @@ import Accordion from './Accordion';
 import Skeleton from './Skeleton';
 import Loader from './Loader';
 import PriceCard from './PriceCard';
+import Breadcrumbs from './Breadcrumbs';
 
 
 export {
@@ -12,5 +13,6 @@ export {
     Accordion,
     Skeleton,
     Loader,
-    PriceCard
+    PriceCard,
+    Breadcrumbs
 }

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -60,7 +60,7 @@ export default function DDrawer({ open, toggleDrawer, navigations }) {
                 </Link>
           </ListItem>
       {[
-          { title: "Khách sạn", slug: '/khach-san'},
+          { title: "Khách sạn", slug: '/hotels'},
           { title: "Địa điểm", slug: '/dia-diem'},
           { title: "Trải nghiệm", slug: '/trai-nghiem'},
           { title: "Liên hệ", slug: '/lien-he'},
@@ -80,7 +80,7 @@ export default function DDrawer({ open, toggleDrawer, navigations }) {
     <div>
       {(
         <>
-          <SwipeableDrawer
+          <Drawer
             anchor={'left'}
             open={open}
             onClose={toggleDrawer(false)}
@@ -91,7 +91,7 @@ export default function DDrawer({ open, toggleDrawer, navigations }) {
             // transitionDuration={{enter: 1.5, exit: 1.5}}
           >
             {list()}
-          </SwipeableDrawer>
+          </Drawer>
         </>
       )}
     </div>

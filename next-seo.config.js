@@ -1,7 +1,7 @@
 export default {
     title : "Lux Journey",
     description : 'DB created with nextjs and strapi',
-    titleTemplate : 'Lux Journey | %s',
+    titleTemplate : 'Lux Vacation | %s',
     openGraph: {
         type: 'website',
         locale: 'vi-vn',

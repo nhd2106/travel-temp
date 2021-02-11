@@ -40,10 +40,10 @@ const PriceCardStyle = styled.div`
     }   
 `
 
-const PriceCards = ({ title, price, urlImage }) => {
+const PriceCards = ({ title, price, urlImage, slug }) => {
     return (
         <PriceCardStyle>
-            <Link href="/hotels/[id]" >
+            <Link href="/hotels/[slug]" as={`hotels/${slug}`} >
                 <a>
                     <div className='card-wrapper'>
                     <div className='box'>

@@ -6,17 +6,6 @@ import {
   graphQLCaller
 } from '../../libs/backend';
 
-function* fetchPosts() {
-  try {
-    const { data: posts } = yield call(fetchStrapi, "posts");
-    yield put({
-      type: BLOG.update,
-      posts,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-}
 
 export function* queryPosts  () {
   try {
@@ -62,19 +51,6 @@ export function* queryPostDetail({ slug }) {
 
 
 
-function* fetchPostDetails({ slug }) {
-  try {
-    const { data: postDetails } = yield call(fetchStrapi, `posts/?slug=${slug}`);
-    yield put({
-      type: BLOG.update,
-      postDetails: {...postDetails[0]},
-    });
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-
 export const handlerGetPosts = () => ({
   type: BLOG.handlers.get,
 });
@@ -85,7 +61,6 @@ export const handlerGetPostDetails = (slug) => ({
 
 export default function* saga() {
   yield all([
-    // yield takeLatest(BLOG.handlers.get, fetchPosts),
     yield takeLatest(BLOG.handlers.get, queryPosts),
     yield takeLatest(BLOG.handlers.getDetails, queryPostDetail),
   ]);

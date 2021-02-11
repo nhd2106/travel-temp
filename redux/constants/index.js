@@ -38,8 +38,9 @@ export const PRODUCT = {
   handlers: {
     get: "PRODUCT_GET_HANDLER",
     getDetails: "PRODUCT_GETDETAILS_HANDLER",
+    getPromotion: "PRODUCT_GETPROMOTION_HANDLER"
   },
-  update: "CART_UPDATE",
+  update: "PRODUCT_UPDATE",
 };
 
 export const CART = {
