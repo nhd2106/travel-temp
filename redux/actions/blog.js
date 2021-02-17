@@ -14,7 +14,7 @@ export function* queryPosts  () {
         title,
         where,
         shortDesc,
-        og_img {
+        og_image {
           url
         },
         slug
