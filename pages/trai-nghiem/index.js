@@ -6,6 +6,7 @@ import { NextSeo } from "next-seo";
 import MediaCard from "../../components/Card";
 import styled from 'styled-components';
 import TraiNgiemSVG from './svg';
+import { BACKEND } from '../../libs/config';
 
 
 import { handlerGetPosts } from "../../redux/actions/blog";
@@ -126,6 +127,7 @@ export default function TraiNghiem(props) {
       },
     ],
   };
+  const baseUrl = BACKEND();
   return (
     <>
       <NextSeo {...SEO} />
@@ -176,7 +178,7 @@ export default function TraiNghiem(props) {
                 return (
                   <MediaCard
                     key={slug}
-                    image={`http://localhost:1337${url}`}
+                    image={`${baseUrl}${url}`}
                     title={title}
                     description={shortDesc}
                     slug={slug}
@@ -201,7 +203,7 @@ export default function TraiNghiem(props) {
                 return (
                   <MediaCard
                     key={slug}
-                    image={`http://localhost:1337${url}`}
+                    image={`${baseUrl}${url}`}
                     title={title}
                     description={shortDesc}
                     slug={slug}
@@ -225,7 +227,7 @@ export default function TraiNghiem(props) {
                 const { url } = og_image || '';
                 return (
                   <MediaCard
-                    image={`http://localhost:1337${url}`}
+                    image={`${baseUrl}${url}`}
                     title={title}
                     description={shortDesc}
                     slug={slug}
@@ -251,7 +253,7 @@ export default function TraiNghiem(props) {
                 return (
                   <MediaCard
                     key={slug}
-                    image={`http://localhost:1337${url}`}
+                    image={`${baseUrl}${url}`}
                     title={title}
                     description={shortDesc}
                     slug={slug}

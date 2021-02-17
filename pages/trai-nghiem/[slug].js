@@ -7,6 +7,7 @@ import { Container } from "@material-ui/core";
 import styled from 'styled-components';
 
 import { handlerGetPostDetails } from "../../redux/actions/blog";
+import { BACKEND } from '../../libs/config';
 
  const BlogStyles = styled.div`
   img {
@@ -51,7 +52,8 @@ export default function Post() {
   const render = useMemo(() => {
     if (postDetails) return { __html: postDetails.content };
   }, [postDetails]);
-  const coverUrl = url ? `http://localhost:1337${url}` : "";
+  const baseUrl = BACKEND();
+  const coverUrl = url ? `${baseUrl}${url}` : "";
   const SEO = {
     title: postDetails ? postDetails.title : '',
   };
