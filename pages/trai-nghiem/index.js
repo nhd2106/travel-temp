@@ -146,7 +146,7 @@ export default function TraiNghiem(props) {
         {posts
           ? posts.map((post) => {
               const {
-                og_img: { url },
+                og_image: { url },
                 id,
                 title,
                 shortDesc,
@@ -167,12 +167,12 @@ export default function TraiNghiem(props) {
             <Slider {...settings}>
               {posts.map((post) => {
                 const {
-                  og_img,
+                  og_image,
                   title,
                   shortDesc,
                   slug
                 } = post || "";
-                const { url } = og_img || ''
+                const { url } = og_image || ''
                 return (
                   <MediaCard
                     key={slug}
@@ -192,12 +192,12 @@ export default function TraiNghiem(props) {
             <Slider {...settings}>
               {posts.map((post) => {
                 const {
-                  og_img,
+                  og_image,
                   title,
                   shortDesc,
                   slug
                 } = post || "";
-                const { url } = og_img || '';
+                const { url } = og_image || '';
                 return (
                   <MediaCard
                     key={slug}
@@ -217,12 +217,12 @@ export default function TraiNghiem(props) {
             <Slider {...settings}>
               {posts.map((post) => {
                 const {
-                  og_img,
+                  og_image,
                   slug,
                   title,
                   shortDesc,
                 } = post || "";
-                const { url } = og_img || '';
+                const { url } = og_image || '';
                 return (
                   <MediaCard
                     image={`http://localhost:1337${url}`}
@@ -242,12 +242,12 @@ export default function TraiNghiem(props) {
             <Slider {...settings}>
               {posts.map((post) => {
                 const {
-                  og_img,
+                  og_image,
                   slug,
                   title,
                   shortDesc,
                 } = post || "";
-                const { url } = og_img || '';
+                const { url } = og_image || '';
                 return (
                   <MediaCard
                     key={slug}

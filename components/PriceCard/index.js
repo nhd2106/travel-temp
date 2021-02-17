@@ -47,7 +47,7 @@ const PriceCards = ({ title, price, urlImage, slug }) => {
                 <a>
                     <div className='card-wrapper'>
                     <div className='box'>
-                    <img src={`http://localhost:1337${urlImage}`} width="100%" height="100%" />
+                    <img src={`https://strapi-mongo-duoc.herokuapp.com${urlImage}`} width="100%" height="100%" />
                     <div className='description'>
                         <h3>{title}</h3>
                         <div className='number'>

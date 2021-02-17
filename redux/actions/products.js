@@ -34,7 +34,6 @@ export function* queryProducts() {
       products {
         title,
         slug,
-        where,
         price,
         og_image  {
           url

@@ -124,7 +124,7 @@ export default function DNavbar({ navigations }) {
                     fontSize: "calc(0.7rem + 1vw)",
                   }}
                 >
-                  Lux Journey
+                  Yêu Vivu
                 </a>
               </Link>
             </div>

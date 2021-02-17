@@ -34,7 +34,7 @@ export function* queryPostDetail({ slug }) {
   try {
     const { posts: postDetails } = yield graphQLCaller(`query{
       posts(where:{ slug: "${slug}" }) {
-        og_img{
+        og_image{
           url
         },
         content
