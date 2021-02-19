@@ -17,6 +17,7 @@ import { BACKEND } from '../../libs/config';
   iframe {
     width: 100%;
   }
+
 `;
  const BlogCover = styled.div`
   .cover {
@@ -70,7 +71,7 @@ export default function Post() {
 
         <div
           style={{
-            width: "80%",
+            width: "70%",
             margin: "auto",
           }}
           dangerouslySetInnerHTML={render}
