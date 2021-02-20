@@ -1,31 +1,44 @@
-import React, {
-  useEffect,
-  useCallback,
-  useState,
-  useMemo
- } from "react";
+import React, { useEffect, useCallback, useState, useMemo } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
-import styled from 'styled-components';
-import { NextSeo } from 'next-seo';
-import ImageGallery from 'react-image-gallery';
+import styled from "styled-components";
+import { NextSeo } from "next-seo";
+import ImageGallery from "react-image-gallery";
 
-import { Breadcrumbs } from '../../components/';
-import {
-  Paper,
-  Tabs,
-  Tab
-} from '@material-ui/core';
-import {
-  HotelStyles,
-  imageStyles
-} from '../../styles';
+import { Breadcrumbs } from "../../components/";
+import { Paper, Tabs, Tab, Typography, Box } from "@material-ui/core";
+import { HotelStyles, imageStyles } from "../../styles";
 
 import { handlerGetProductDetails } from "../../redux/actions/products";
-import { BACKEND } from '../../libs/config';
+import { BACKEND } from "../../libs/config";
 
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          {children}
+        </Box>
+      )}
+    </div>
+  );
+}
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
 
 const hotel = (props) => {
   const router = useRouter();
@@ -40,29 +53,28 @@ const hotel = (props) => {
     setTabValue(newValue);
   };
 
-  const title = productDetails ? productDetails.title : '';
+  const title = productDetails ? productDetails.title : "";
+  console.log(productDetails)
+  const render = useMemo(() => {
+    if (productDetails) return { __html: productDetails.details };
+  }, [productDetails]);
+  console.log(render)
   const slugNTitle = [
-    { slug: '/hotels', title: "khách sạn" },
-    { slug:`/${slug}`, title },
-  ]
+    { slug: "/hotels", title: "khách sạn" },
+    { slug: `/${slug}`, title },
+  ];
   const SEO = {
     title,
   };
-  const renderDetails = useCallback(() =>{
-    if(productDetails && Object.keys(productDetails).length) {
-      const {
-        title,
-        details,
-        og_image,
-        detail_images,
-        price,
-      } = productDetails;
+  const renderDetails = useCallback(() => {
+    if (productDetails && Object.keys(productDetails).length) {
+      const { title, details, og_image, detail_images, price } = productDetails;
       const baseUrl = BACKEND();
       const settings = {
-        customPaging: function(i) {
+        customPaging: function (i) {
           return (
             <a>
-              <img src={`${baseUrl}${detail_images[i].url}`} width='100%'/>
+              <img src={`${baseUrl}${detail_images[i].url}`} width="100%" />
             </a>
           );
         },
@@ -72,19 +84,18 @@ const hotel = (props) => {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
-        // centerMode: true
-      }
-      const imagesDetails = detail_images ? detail_images.map(({ url }) => {
-        const imageTarget = url.split('/uploads/')[1];
-        const thumbnail = `${baseUrl}/uploads/thumbnail_${imageTarget}`;
-        console.log(thumbnail)
-        return ({
-          original: `${baseUrl}${url}`,
-          thumbnail
-        })
-      })
-     : null;
-      return(
+      };
+      const imagesDetails = detail_images
+        ? detail_images.map(({ url }) => {
+            const imageTarget = url.split("/uploads/")[1];
+            const thumbnail = `${baseUrl}/uploads/thumbnail_${imageTarget}`;
+            return {
+              original: `${baseUrl}${url}`,
+              thumbnail,
+            };
+          })
+        : null;
+      return (
         <div>
           <h2>{title}</h2>
           <ImageGallery items={imagesDetails} />
@@ -95,30 +106,39 @@ const hotel = (props) => {
               indicatorColor="primary"
               textColor="primary"
             >
-              <Tab label="mô tả"/>
-              <Tab label="mô tả 2"/>
-              <Tab label="mô tả 3"/>
-              <Tab label="mô tả 4"/>
+              <Tab label="Mô tả" {...a11yProps(0)} />
+              <Tab label="Loại phòng" {...a11yProps(1)} />
+              <Tab label="Đánh giá " {...a11yProps(2)} />
             </Tabs>
           </Paper>
-
+          <TabPanel value={tabValue} index={0}>
+          <div
+          dangerouslySetInnerHTML={render}
+        />
+          </TabPanel>
+          <TabPanel value={tabValue} index={1}>
+            Item Two
+          </TabPanel>
+          <TabPanel value={tabValue} index={2}>
+            Item Three
+          </TabPanel>
         </div>
-      )
+      );
     }
     return null;
-  }, [productDetails, tabValue])
+  }, [productDetails, tabValue]);
   return (
-    <div style={{
-      marginBottom: "1rem",
-      marginBottom: "5rem",
-    }}>
+    <div
+      style={{
+        marginBottom: "1rem",
+        marginBottom: "5rem",
+      }}
+    >
       <HotelStyles>
-      <NextSeo {...SEO} />
-      <Breadcrumbs
-        slugNTitle={slugNTitle}
-      />
-      {renderDetails()}
-    </HotelStyles>
+        <NextSeo {...SEO} />
+        <Breadcrumbs slugNTitle={slugNTitle} />
+        {renderDetails()}
+      </HotelStyles>
     </div>
   );
 };

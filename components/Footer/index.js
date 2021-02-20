@@ -64,7 +64,7 @@ export default function Footer() {
         <div className="footer">
           <div className="left">
             <div>
-              <h1>Lux Journey</h1>
+              <h1>Yêu Vivu</h1>
               <span>
                 Đồng hành cùng kỳ nghỉ của bạn, <br></br> bọn mình luôn luôn có
                 giá ưu đãi nhất.
@@ -112,8 +112,8 @@ export default function Footer() {
           </div>
         </div>
         <div className="copyright">
-          <h1>Lux Journey</h1>
-          <span>Copyright © 2021 Lux Journey.</span>
+          <h1>Yêu Vivu</h1>
+          <span>Copyright © 2021 Yêu Vivu.</span>
         </div>
       </FooterStyles>
     </>
