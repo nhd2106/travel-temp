@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 
 import {  numberFormatter } from '../../libs/utils';
+import { BACKEND } from '../../libs/config';
 
 const PriceCardStyle = styled.div`
     margin: 2rem 1rem;
@@ -41,13 +42,14 @@ const PriceCardStyle = styled.div`
 `
 
 const PriceCards = ({ title, price, urlImage, slug }) => {
+    const baseUrl = BACKEND();
     return (
         <PriceCardStyle>
             <Link href="/hotels/[slug]" as={`hotels/${slug}`} >
                 <a>
                     <div className='card-wrapper'>
                     <div className='box'>
-                    <img src={`https://strapi-mongo-duoc.herokuapp.com${urlImage}`} width="100%" height="100%" />
+                    <img src={`${baseUrl}${urlImage}`} width="100%" height="100%" />
                     <div className='description'>
                         <h3>{title}</h3>
                         <div className='number'>

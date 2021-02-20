@@ -10,6 +10,7 @@ import Router from "next/router";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import Button from "@material-ui/core/Button";
 import Waiting from "../components/Waiting";
