@@ -66,6 +66,7 @@ const HotelsStyles = styled.div`
     width: 100%;
     // padding-right: 1rem;
   }
+  background-color: #FAFAFA!important;
 `;
 export default function Hotels(props) {
   const dispatch = useDispatch();
@@ -98,6 +99,7 @@ export default function Hotels(props) {
       style={{
         marginBottom: "1rem",
         marginBottom: "5rem",
+        background: '#fafafa'
       }}
     >
       <HotelsStyles>

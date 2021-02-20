@@ -54,11 +54,12 @@ const hotel = (props) => {
   };
 
   const title = productDetails ? productDetails.title : "";
-  console.log(productDetails)
-  const render = useMemo(() => {
+  const renderDetail = useMemo(() => {
     if (productDetails) return { __html: productDetails.details };
   }, [productDetails]);
-  console.log(render)
+  const renderFeatures = useMemo(() => {
+    if (productDetails) return { __html: productDetails.features };
+  }, [productDetails]);
   const slugNTitle = [
     { slug: "/hotels", title: "khách sạn" },
     { slug: `/${slug}`, title },
@@ -107,21 +108,27 @@ const hotel = (props) => {
               textColor="primary"
             >
               <Tab label="Mô tả" {...a11yProps(0)} />
-              <Tab label="Loại phòng" {...a11yProps(1)} />
-              <Tab label="Đánh giá " {...a11yProps(2)} />
+              <Tab label="Tiện ích" {...a11yProps(1)} />
+              <Tab label="Loại phòng " {...a11yProps(2)} />
             </Tabs>
           </Paper>
+          <Paper style={{
+            marginTop: '1rem'
+          }}>
           <TabPanel value={tabValue} index={0}>
           <div
-          dangerouslySetInnerHTML={render}
+          dangerouslySetInnerHTML={renderDetail}
         />
           </TabPanel>
           <TabPanel value={tabValue} index={1}>
-            Item Two
+          <div
+          dangerouslySetInnerHTML={renderFeatures}
+        />
           </TabPanel>
           <TabPanel value={tabValue} index={2}>
             Item Three
           </TabPanel>
+          </Paper>
         </div>
       );
     }

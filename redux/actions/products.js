@@ -57,6 +57,7 @@ export function* queryProductDetail({ slug }) {
       }) {
         title,
         details,
+        features,
         price,
         og_image {
           url
