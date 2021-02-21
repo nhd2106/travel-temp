@@ -27,6 +27,17 @@ function* fetchProductDetails({ id }) {
     console.log(error);
   }
 }
+function* getNumberOfProducts() {
+  try {
+    const { data: numberOfProducts } = yield call(fetchStrapi, `products/count`);
+    yield put({
+      type: PRODUCT.update,
+      numberOfProducts,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export function* queryProducts() {
   try {
@@ -44,6 +55,30 @@ export function* queryProducts() {
     yield put({
       type: PRODUCT.update,
       products,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+export function* queryProductsByPage({ page }) {
+  try {
+    const { data: numberOfProducts } = yield call(fetchStrapi, `products/count`);
+    console.log(numberOfProducts)
+    const { products } = yield graphQLCaller(`query {
+      products(limit: 2, start:${page*2 - 2}) {
+        title,
+        slug,
+        price,
+        og_image  {
+          url
+        },
+        promotion
+      }
+    }`);
+    yield put({
+      type: PRODUCT.update,
+      products,
+      numberOfProducts
     });
   } catch (error) {
     console.log(error);
@@ -100,6 +135,14 @@ export function* queryPromotionProducts (){
 export const handlerProducts = () => ({
   type: PRODUCT.handlers.get,
 });
+export const handlerCountProducts = () => ({
+  type: PRODUCT.handlers.count,
+});
+
+export const handlerProductsByPage = (page) => ({
+  type: PRODUCT.handlers.getPage,
+  page
+});
 export const handlerPromotionProduct = () => ({
   type: PRODUCT.handlers.getPromotion,
 });
@@ -110,7 +153,9 @@ export const handlerGetProductDetails = (slug) => ({
 
 export default function* saga() {
   yield all([
+    yield takeLatest (PRODUCT.handlers.count, getNumberOfProducts),
     yield takeLatest(PRODUCT.handlers.get, queryProducts),
+    yield takeLatest(PRODUCT.handlers.getPage, queryProductsByPage),
     yield takeLatest(PRODUCT.handlers.getPromotion, queryPromotionProducts),
     yield takeLatest(PRODUCT.handlers.getDetails, queryProductDetail),
   ]);

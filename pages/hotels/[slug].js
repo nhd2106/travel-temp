@@ -137,8 +137,9 @@ const hotel = (props) => {
   return (
     <div
       style={{
-        marginBottom: "1rem",
-        marginBottom: "5rem",
+        paddingTop: "1rem",
+        paddingBottom: "5rem",
+        background: '#fafafa'
       }}
     >
       <HotelStyles>

@@ -37,8 +37,10 @@ export const BLOG = {
 export const PRODUCT = {
   handlers: {
     get: "PRODUCT_GET_HANDLER",
+    getPage: "PRODUCT_GETPAGE_HANDLER",
     getDetails: "PRODUCT_GETDETAILS_HANDLER",
-    getPromotion: "PRODUCT_GETPROMOTION_HANDLER"
+    getPromotion: "PRODUCT_GETPROMOTION_HANDLER",
+    count: "PRODUCT_COUNT_HANDLER"
   },
   update: "PRODUCT_UPDATE",
 };

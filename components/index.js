@@ -5,6 +5,7 @@ import Skeleton from './Skeleton';
 import Loader from './Loader';
 import PriceCard from './PriceCard';
 import Breadcrumbs from './Breadcrumbs';
+import HotelItem from './HotelItem';
 
 
 export {
@@ -14,5 +15,6 @@ export {
     Skeleton,
     Loader,
     PriceCard,
-    Breadcrumbs
+    Breadcrumbs,
+    HotelItem
 }

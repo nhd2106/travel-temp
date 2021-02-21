@@ -2,7 +2,8 @@ import { NextSeo } from "next-seo";
 import styled from "styled-components";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/router";
 
 import {
   Grid,
@@ -18,17 +19,17 @@ import {
   Checkbox,
   Slider,
 } from "@material-ui/core";
+import { Pagination } from "@material-ui/lab";
 import {
   ExpandMore as ExpandMoreIcon,
   FavoriteBorder,
   Favorite,
 } from "@material-ui/icons";
-import { PriceCard, Skeleton, Breadcrumbs } from "../../components";
+import { PriceCard, Skeleton, Breadcrumbs, HotelItem } from "../../components";
 
-import { handlerProducts } from "../../redux/actions/products";
-import {
-  numberFormatter
-} from '../../libs/utils';
+import { handlerProductsByPage, handlerCountProducts } from "../../redux/actions/products";
+import { numberFormatter } from "../../libs/utils";
+import { BACKEND } from "../../libs/config";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,10 +67,16 @@ const HotelsStyles = styled.div`
     width: 100%;
     // padding-right: 1rem;
   }
-  background-color: #FAFAFA!important;
+  background-color: #fafafa !important;
+  .pagination {
+    margin-top: 3rem;
+}
 `;
+
 export default function Hotels(props) {
   const dispatch = useDispatch();
+  const router = useRouter();
+  console.log(router.query.page)
   const [expandeds, setExpandeds] = useState({
     hotelTypes: true,
     prices: true,
@@ -77,10 +84,19 @@ export default function Hotels(props) {
     cities: true,
   });
   const [prices, setPrices] = useState([0, 100000000]);
-  const products = useSelector(({ products }) => products.products);
+  const {
+    products,
+    numberOfProducts
+  } = useSelector(({ products }) => ({
+    products: products.products,
+    numberOfProducts: products.numberOfProducts
+  }));
+  const pagesCount = Math.round(numberOfProducts/2) || 5
+  console.log(pagesCount)
   useEffect(() => {
-    dispatch(handlerProducts());
-  }, []);
+    const page = router.query.page || 1;
+    dispatch(handlerProductsByPage(page));
+  }, [router.query.page]);
   const SEO = {
     title: "Khách sạn",
   };
@@ -94,32 +110,45 @@ export default function Hotels(props) {
   const handlePrices = (event, newValue) => {
     setPrices(newValue);
   };
+  const handleChangePage = (event, page) => {
+    const currentPath = router.pathname;
+    router.replace(`${currentPath}?page=${page}`)
+  };
+  const baseUrl = BACKEND();
   return (
     <div
       style={{
         marginBottom: "1rem",
         marginBottom: "5rem",
-        background: '#fafafa'
+        background: "#fafafa",
       }}
     >
       <HotelsStyles>
         <NextSeo {...SEO} />
-        <Breadcrumbs slugNTitle={[{ slug: '/hotels', title: "khách sạn" }]}/>
+        <Breadcrumbs slugNTitle={[{ slug: "/hotels", title: "khách sạn" }]} />
         <Grid container>
-          <Grid lg={3} sm={3} xs={12} container>
-            <div style={{width: '90%'}}>
+          <Grid
+            lg={3}
+            sm={3}
+            xs={12}
+            container
+            style={{
+              justifyContent: "center",
+            }}
+          >
+            <Paper style={{ width: "90%", padding: "1rem" }}>
               <h4>Tìm kiếm khách sạn</h4>
               <form noValidate autoComplete="off">
                 <TextField id="standard-basic" label="Bạn muốn đi đâu?" />
               </form>
               <div className={classes.AccordionWrapper}>
-                <Accordion
+                <div
                   expanded={expandeds.cities}
                   onChange={({ currentTarget }) => {
                     handleExpand(currentTarget.id);
                   }}
                 >
-                  <AccordionSummary
+                  <div
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="cities"
                     id="cities"
@@ -127,8 +156,8 @@ export default function Hotels(props) {
                     <Typography className={classes.heading}>
                       Top điểm đến
                     </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
+                  </div>
+                  <div>
                     <FormGroup column>
                       <FormControlLabel
                         control={
@@ -176,15 +205,15 @@ export default function Hotels(props) {
                         label="Vũng Tàu"
                       />
                     </FormGroup>
-                  </AccordionDetails>
-                </Accordion>
-                <Accordion
+                  </div>
+                </div>
+                <div
                   expanded={expandeds.hotelTypes}
                   onChange={({ currentTarget }) => {
                     handleExpand(currentTarget.id);
                   }}
                 >
-                  <AccordionSummary
+                  <div
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="hotelTypes"
                     id="hotelTypes"
@@ -192,8 +221,8 @@ export default function Hotels(props) {
                     <Typography className={classes.heading}>
                       Loại khách sạn
                     </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
+                  </div>
+                  <div>
                     <FormGroup column>
                       <FormControlLabel
                         control={
@@ -232,56 +261,62 @@ export default function Hotels(props) {
                         label="Biệt thự"
                       />
                     </FormGroup>
-                  </AccordionDetails>
-                </Accordion>
-                <Accordion
+                  </div>
+                </div>
+                <div
                   expanded={expandeds.prices}
                   onChange={({ currentTarget }) => {
                     handleExpand(currentTarget.id);
                   }}
                 >
-                  <AccordionSummary
+                  <div
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="prices"
                     id="prices"
                   >
                     <Typography className={classes.heading}>
-                      khoảng giá 
+                      khoảng giá
                     </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <div style={{
-                      display: 'flex',
-                      flexDirection: 'column'
-                    }}>
-                    <Typography style={{
-                      wordWrap: 'break-word'
-                    }}>
-                     từ {numberFormatter.format(prices[0])}
-                    </Typography>
-                    <Typography style={{
-                      wordWrap: 'break-word'
-                    }}>
-                     đến {numberFormatter.format(prices[1])} vnđ
-                    </Typography>
-                    <Slider
-                      value={prices}
-                      onChange={handlePrices}
-                      aria-labelledby="range-slider"
-                      // getAriaValueText={valuetext}
-                      min={0}
-                      max={10000000}
-                    />
+                  </div>
+                  <div>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                    >
+                      <Typography
+                        style={{
+                          wordWrap: "break-word",
+                        }}
+                      >
+                        từ {numberFormatter.format(prices[0])}
+                      </Typography>
+                      <Typography
+                        style={{
+                          wordWrap: "break-word",
+                        }}
+                      >
+                        đến {numberFormatter.format(prices[1])} vnđ
+                      </Typography>
+                      <Slider
+                        value={prices}
+                        onChange={handlePrices}
+                        aria-labelledby="range-slider"
+                        // getAriaValueText={valuetext}
+                        min={0}
+                        max={10000000}
+                      />
                     </div>
-                  </AccordionDetails>
-                </Accordion>
-                <Accordion
+                  </div>
+                </div>
+                <div
                   expanded={expandeds.meals}
                   onChange={({ currentTarget }) => {
                     handleExpand(currentTarget.id);
                   }}
                 >
-                  <AccordionSummary
+                  <div
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="meals"
                     id="meals"
@@ -289,8 +324,8 @@ export default function Hotels(props) {
                     <Typography className={classes.heading}>
                       Bao gồm bữa ăn
                     </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
+                  </div>
+                  <div>
                     <FormGroup column>
                       <FormControlLabel
                         control={
@@ -329,26 +364,35 @@ export default function Hotels(props) {
                         label="Tất cả bữa ăn"
                       />
                     </FormGroup>
-                  </AccordionDetails>
-                </Accordion>
+                  </div>
+                </div>
               </div>
-            </div>
+            </Paper>
           </Grid>
-          <Grid lg={9} sm={9} xs={12} container>
+          <Grid lg={9} sm={9} xs={12} style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+          }}>
             {products && products.length ? (
-              products.map(({ title, price, slug, og_image: { url } }) => (
-                <Grid lg={4} sm={4} xs={12} key={slug}>
-                  <PriceCard
+              <div>
+                {products.map(({ title, price, slug, og_image: { url } }) => {
+                const imageTarget = url.split("/uploads/")[1];
+                const thumbnail = `${baseUrl}/uploads/thumbnail_${imageTarget}`;
+                return (
+                  <HotelItem
                     className="card-style"
                     title={title}
                     price={price}
-                    urlImage={url}
+                    urlImage={thumbnail}
                     slug={slug}
+                    key={slug}
                   />
-                </Grid>
-              ))
+                );
+              })}
+              </div>
             ) : (
-              <>
+              <div>
                 <Grid lg={4} sm={4} xs={12}>
                   <Skeleton />
                 </Grid>
@@ -358,8 +402,16 @@ export default function Hotels(props) {
                 <Grid lg={4} sm={4} xs={12}>
                   <Skeleton />
                 </Grid>
-              </>
+              </div>
             )}
+            <div className="pagination">
+              <Pagination
+                count={pagesCount}
+                variant="outlined"
+                shape="rounded"
+                onChange={handleChangePage}
+              />
+            </div>
           </Grid>
         </Grid>
       </HotelsStyles>
