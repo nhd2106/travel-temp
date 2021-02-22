@@ -2,9 +2,9 @@
 import DNavbar from "./Navbar";
 import styled from 'styled-components';
 const NavigationsStyled = styled.div`
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  // position: sticky;
+  // top: 0;
+  // z-index: 1000;
   color: white;
   .top-header {
     background-color: #ffa900;

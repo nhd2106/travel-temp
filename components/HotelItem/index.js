@@ -2,6 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 
 import styled from 'styled-components';
+import {
+    Button
+} from '@material-ui/core';
 
 import { numberFormatter } from '../../libs/utils';
 import { BACKEND } from '../../libs/config';
@@ -12,12 +15,16 @@ const Wrapper = styled.div`
     border-radius: 4px;
     padding: 1rem;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+    min-height: 200px;
     &:hover {
         // box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1), 0px 20px 20px rgba(0, 0, 0, 0.1);
         transform: scale(1.02);
         box-shadow: 0 0 0 2px #1BA0E2;
         transition: 0.5s;
 
+    }
+    h3 {
+        font-size: 1vw - 0.5rem;
     }
     .hotel_content {
         display: flex;
@@ -87,6 +94,15 @@ const Wrapper = styled.div`
         width: -webkit-calc(100% - 150px);
     }
 }
+@media (max-width: 967px) {
+    .hotel_image {
+        width: 120px;
+    }
+    .hotel_content {
+        width: calc(100% - 120px);
+        width: -webkit-calc(100% - 150px);
+    }
+}
 
 `
 
@@ -94,7 +110,9 @@ const HotelItem = ({ title, price, urlImage, slug }) => {
 
     return (
         <div style={{
-            margin: '1rem'
+            marginTop: '1rem',
+            marginBottom: '1rem',
+            minHeight: '200px',
         }}>
             <Link href="/hotels/[slug]" as={`hotels/${slug}`} >
                 <a>
@@ -114,7 +132,7 @@ const HotelItem = ({ title, price, urlImage, slug }) => {
                             </div>
                             <div className="content_right">
                                <div>{numberFormatter.format(price)}</div>
-                               <button>xem phòng</button>
+                               <Button color='primary' variant='outlined'>xem phòng</Button>
                             </div>
 
                         </div>

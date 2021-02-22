@@ -63,7 +63,6 @@ export function* queryProducts() {
 export function* queryProductsByPage({ page }) {
   try {
     const { data: numberOfProducts } = yield call(fetchStrapi, `products/count`);
-    console.log(numberOfProducts)
     const { products } = yield graphQLCaller(`query {
       products(limit: 2, start:${page*2 - 2}) {
         title,

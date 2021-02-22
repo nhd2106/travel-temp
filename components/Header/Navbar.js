@@ -90,7 +90,7 @@ export default function DNavbar({ navigations }) {
 
   return (
     <>
-      <AppBar position="sticky" style={{ background: "#1BA0E2" }}>
+      <AppBar position="static" style={{ background: "#1BA0E2" }}>
         <Toolbar>
           <Hidden smUp>
             <IconButton
