@@ -1,7 +1,6 @@
 import React, { useEffect, useCallback, useState, useMemo } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import Slider from "react-slick";
 import styled from "styled-components";
 import { NextSeo } from "next-seo";
 import ImageGallery from "react-image-gallery";
@@ -12,6 +11,13 @@ import { HotelStyles, imageStyles } from "../../styles";
 
 import { handlerGetProductDetails } from "../../redux/actions/products";
 import { BACKEND } from "../../libs/config";
+
+
+const Wrapper = styled.div`
+        padding-top: "1rem"ơ
+        padding-bottom: "5rem",
+
+`
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -135,19 +141,13 @@ const hotel = (props) => {
     return null;
   }, [productDetails, tabValue]);
   return (
-    <div
-      style={{
-        paddingTop: "1rem",
-        paddingBottom: "5rem",
-        background: '#fafafa'
-      }}
-    >
+    <Wrapper>
       <HotelStyles>
         <NextSeo {...SEO} />
         <Breadcrumbs slugNTitle={slugNTitle} />
         {renderDetails()}
       </HotelStyles>
-    </div>
+    </Wrapper>
   );
 };
 

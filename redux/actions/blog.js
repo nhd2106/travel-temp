@@ -37,7 +37,8 @@ export function* queryPostDetail({ slug }) {
         og_image{
           url
         },
-        content
+        content,
+        title,
       }
     }`);
     yield put({

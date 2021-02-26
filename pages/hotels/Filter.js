@@ -275,18 +275,6 @@ const Filter = ({ open, toggleDrawer, handlePrices, handleCloseDialog }) => {
 
   return (
     <>
-      {/* <Drawer
-            anchor={'bottom'}
-            open={open}
-            // onClose={handleCloseDialog(false)}
-            // onOpen={handleCloseDialog(true)}
-            classes={{
-              paperAnchorLeft: classes.paperAnchorLeft
-            }}
-            // transitionDuration={{enter: 1.5, exit: 1.5}}
-          >
-            {list()}
-          </Drawer> */}
 
       <Dialog
         open={open}
@@ -294,19 +282,6 @@ const Filter = ({ open, toggleDrawer, handlePrices, handleCloseDialog }) => {
         // TransitionComponent={Transition}
         aria-labelledby="customized-dialog-title"
       >
-        {/* <AppBar>
-          <Toolbar>
-            <IconButton edge="start" color="inherit" onClick={handleCloseDialog} aria-label="close">
-              <CloseIcon />
-            </IconButton>
-            <Typography variant="h6" className={classes.title}>
-              Sound
-            </Typography>
-            <Button autoFocus color="inherit" onClick={handleCloseDialog}>
-              save
-            </Button>
-          </Toolbar>
-        </AppBar> */}
         <DialogTitle onClose={handleCloseDialog} id="customized-dialog-title">
           Bộ lọc
         <Button edge="start" color="inherit" onClick={handleCloseDialog} aria-label="close" className="apply-button">
