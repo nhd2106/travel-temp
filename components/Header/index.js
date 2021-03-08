@@ -36,6 +36,11 @@ const NavigationsStyled = styled.div`
   .MuiToolbar-root {
     color: black;
   }
+  @media (max-width: 600px) {
+    .MuiAppBar-root {
+      background: #F4AE15!important;
+    }
+  }
 `;
 export default function Header({ navigations }) {
   return (
