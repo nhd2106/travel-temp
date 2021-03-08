@@ -17,6 +17,8 @@ import {
   BottomNavigation,
   BottomNavigationAction,
   Hidden,
+  Radio,
+  RadioGroup
 } from "@material-ui/core";
 import { Pagination } from "@material-ui/lab";
 import {
@@ -87,16 +89,15 @@ const HotelsStyles = styled.div`
 export default function Hotels(props) {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [expandeds, setExpandeds] = useState({
-    hotelTypes: true,
-    prices: true,
-    meals: true,
-    cities: true,
-  });
+  const  [where, setWhere] = useState('');
+
   const [open, setOpen] = useState(false);
 
   const handleCloseDialog = () => {
     setOpen(false)
+  }
+  const handleWhere = (e) => {
+    setWhere(e.target.value)
   }
   const [prices, setPrices] = useState([0, 100000000]);
   const { products, numberOfProducts } = useSelector(({ products }) => ({
@@ -105,20 +106,10 @@ export default function Hotels(props) {
   }));
   const pagesCount = Math.round(numberOfProducts / 2) || 5;
   const page = parseFloat(router.query.page) || 1;
-  useEffect(() => {
-    const page = router.query.page || 1;
-    dispatch(handlerProductsByPage(page));
-  }, [router.query.page]);
   const SEO = {
     title: "Khách sạn",
   };
   const classes = useStyles();
-  const handleExpand = (id) => {
-    setExpandeds((prevExpand) => ({
-      ...prevExpand,
-      [id]: !prevExpand[id],
-    }));
-  };
   const handlePrices = (event, newValue) => {
     setPrices(newValue);
   };
@@ -131,6 +122,12 @@ export default function Hotels(props) {
     router.replace(`${currentPath}?page=${page}`);
   };
   const baseUrl = BACKEND();
+  useEffect(() => {
+    const { where, page } = router.query;
+    console.log(where)
+    dispatch(handlerProductsByPage(page, where));
+  }, [router.query.page, where]);
+  
   return (
     <div
       style={{
@@ -147,6 +144,7 @@ export default function Hotels(props) {
             lg={3}
             sm={3}
             xs={12}
+            item
             container
             style={{
               justifyContent: "center",
@@ -159,88 +157,75 @@ export default function Hotels(props) {
                   <TextField id="standard-basic" label="Bạn muốn đi đâu?" />
                 </form>
                 <div className={classes.AccordionWrapper}>
-                  <div
-                    expanded={expandeds.cities}
-                    onChange={({ currentTarget }) => {
-                      handleExpand(currentTarget.id);
-                    }}
-                  >
-                    <div
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="cities"
-                      id="cities"
-                    >
+                  <div>
+                    <div>
                       <Typography className={classes.heading}>
                         Top điểm đến
                       </Typography>
                     </div>
                     <div>
-                      <FormGroup column>
+                      <RadioGroup value={where} onChange={handleWhere}>
                         <FormControlLabel
                           control={
-                            <Checkbox
+                            <Radio
                               icon={<FavoriteBorder />}
                               checkedIcon={<Favorite />}
                             />
                           }
                           label="Phú Quốc"
+                          value="phu-quoc"
                         />
                         <FormControlLabel
                           control={
-                            <Checkbox
+                            <Radio
                               icon={<FavoriteBorder />}
                               checkedIcon={<Favorite />}
                             />
                           }
                           label="Đà Lạt"
+                          value="da-lat"
                         />
                         <FormControlLabel
                           control={
-                            <Checkbox
+                            <Radio
                               icon={<FavoriteBorder />}
                               checkedIcon={<Favorite />}
                             />
                           }
                           label="Nha Trang"
+                          value="nha-trang"
                         />
                         <FormControlLabel
                           control={
-                            <Checkbox
+                            <Radio
                               icon={<FavoriteBorder />}
                               checkedIcon={<Favorite />}
                             />
                           }
                           label="Hội An"
+                          value="hoi-an"
                         />
                         <FormControlLabel
                           control={
-                            <Checkbox
+                            <Radio
                               icon={<FavoriteBorder />}
                               checkedIcon={<Favorite />}
                             />
                           }
                           label="Vũng Tàu"
+                          value="vung-tau"
                         />
-                      </FormGroup>
+                      </RadioGroup>
                     </div>
                   </div>
-                  <div
-                    expanded={expandeds.hotelTypes}
-                    onChange={({ currentTarget }) => {
-                      handleExpand(currentTarget.id);
-                    }}
-                  >
-                    <div
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="hotelTypes"
-                      id="hotelTypes"
-                    >
+                  <div>
+                    <div>
                       <Typography className={classes.heading}>
                         Loại khách sạn
                       </Typography>
                     </div>
                     <div>
-                      <FormGroup column>
+                      <FormGroup >
                         <FormControlLabel
                           control={
                             <Checkbox
@@ -280,17 +265,8 @@ export default function Hotels(props) {
                       </FormGroup>
                     </div>
                   </div>
-                  <div
-                    expanded={expandeds.prices}
-                    onChange={({ currentTarget }) => {
-                      handleExpand(currentTarget.id);
-                    }}
-                  >
-                    <div
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="prices"
-                      id="prices"
-                    >
+                  <div>
+                    <div>
                       <Typography className={classes.heading}>
                         khoảng giá
                       </Typography>
@@ -327,23 +303,14 @@ export default function Hotels(props) {
                       </div>
                     </div>
                   </div>
-                  <div
-                    expanded={expandeds.meals}
-                    onChange={({ currentTarget }) => {
-                      handleExpand(currentTarget.id);
-                    }}
-                  >
-                    <div
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="meals"
-                      id="meals"
-                    >
+                  <div>
+                    <div>
                       <Typography className={classes.heading}>
                         Bao gồm bữa ăn
                       </Typography>
                     </div>
                     <div>
-                      <FormGroup column>
+                      <FormGroup >
                         <FormControlLabel
                           control={
                             <Checkbox
@@ -391,6 +358,7 @@ export default function Hotels(props) {
             lg={9}
             sm={9}
             xs={12}
+            item
             style={{
               display: "flex",
               flexDirection: "column",
@@ -416,13 +384,13 @@ export default function Hotels(props) {
               </div>
             ) : (
               <div>
-                <Grid lg={4} sm={4} xs={12}>
+                <Grid lg={4} sm={4} xs={12} item>
                   <Skeleton />
                 </Grid>
-                <Grid lg={4} sm={4} xs={12}>
+                <Grid lg={4} sm={4} xs={12} item>
                   <Skeleton />
                 </Grid>
-                <Grid lg={4} sm={4} xs={12}>
+                <Grid lg={4} sm={4} xs={12} item>
                   <Skeleton />
                 </Grid>
               </div>

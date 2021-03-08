@@ -6,6 +6,7 @@ import Loader from './Loader';
 import PriceCard from './PriceCard';
 import Breadcrumbs from './Breadcrumbs';
 import HotelItem from './HotelItem';
+import TopNews from './TopNews';
 
 
 export {
@@ -16,5 +17,6 @@ export {
     Loader,
     PriceCard,
     Breadcrumbs,
-    HotelItem
+    HotelItem,
+    TopNews
 }

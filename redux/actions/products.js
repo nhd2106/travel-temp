@@ -1,4 +1,8 @@
 import { put, takeLatest, all, call, takeEvery } from "redux-saga/effects";
+import {
+  forEach,
+  set
+} from 'lodash';
 
 import { PRODUCT } from "../constants";
 import { fetchStrapi } from "../../utils/callStrapi";
@@ -60,11 +64,32 @@ export function* queryProducts() {
     console.log(error);
   }
 }
-export function* queryProductsByPage({ page }) {
+export function* queryProductsByPage(props) {
+  const { page, type, ...rest } = props;
+  const where = {};
+  console.log(rest)
+  forEach(rest, (value, key) => {
+    if(value) {
+      set(where, `where.${key}`, value)
+    }
+  })
+  console.log(JSON.stringify(where))
+  const query = `query {
+    products(limit: 2, start:${page*2 - 2}, 
+    }) {
+      title,
+      slug,
+      price,
+      og_image  {
+        url
+      },
+      promotion
+    }
+  }`
   try {
     const { data: numberOfProducts } = yield call(fetchStrapi, `products/count`);
     const { products } = yield graphQLCaller(`query {
-      products(limit: 2, start:${page*2 - 2}) {
+      products(limit: 2, start:${(page || 1)*2 - 2}) {
         title,
         slug,
         price,
@@ -138,9 +163,19 @@ export const handlerCountProducts = () => ({
   type: PRODUCT.handlers.count,
 });
 
-export const handlerProductsByPage = (page) => ({
+export const handlerProductsByPage = (
+  page, 
+  where, 
+  hotelType,
+  price,
+  meals,
+) => ({
   type: PRODUCT.handlers.getPage,
-  page
+  page,
+  where,
+  hotelType,
+  meals,
+  price
 });
 export const handlerPromotionProduct = () => ({
   type: PRODUCT.handlers.getPromotion,

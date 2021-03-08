@@ -2,9 +2,9 @@
 import DNavbar from "./Navbar";
 import styled from 'styled-components';
 const NavigationsStyled = styled.div`
-  // position: sticky;
-  // top: 0;
-  // z-index: 1000;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   color: white;
   .top-header {
     background-color: #ffa900;
@@ -22,16 +22,19 @@ const NavigationsStyled = styled.div`
     text-decoration: none !important;
   }
   a {
-    color: white;
+    color: black;
     text-transform: uppercase;
     font-weight: 500;
-    &:hover {
-      text-decoration: none;
-      color: yellow;
-    }
+    // &:hover {
+    //   text-decoration: none;
+    //   color: yellow;
+    // }
   }
   .MuiDrawer-paper {
     background-color: "#393A44";
+  }
+  .MuiToolbar-root {
+    color: black;
   }
 `;
 export default function Header({ navigations }) {

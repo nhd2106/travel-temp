@@ -21,11 +21,11 @@ const useStyles = makeStyles({
     width: 'auto',
   },
   aTag: {
-      color: 'white',
+      color: 'black',
       textDecoration: 'none',
   },
   paperAnchorLeft : {
-    background: '#1BA0E2',
+    background: 'white',
   },
   active: {
     color: 'yellow',
@@ -56,7 +56,7 @@ export default function DDrawer({ open, toggleDrawer, navigations }) {
       <ListItem >
             <ListItemIcon></ListItemIcon>
             <Link href="/">
-                  <a style={{color: 'white'}}><h4>Lux Journey</h4></a>
+                  <a style={{color: 'black'}}><h4>Yêu vivu</h4></a>
                 </Link>
           </ListItem>
       {[
@@ -66,7 +66,7 @@ export default function DDrawer({ open, toggleDrawer, navigations }) {
           { title: "Liên hệ", slug: '/lien-he'},
       ].map(({ title, slug }, index) => (
           <ListItem button key={slug}>
-            <ListItemIcon style={{color: 'white'}}>{index % 2 === 0 ? <HotelIcon /> : <LoyaltyIcon />}</ListItemIcon>
+            <ListItemIcon style={{color: 'black'}}>{index % 2 === 0 ? <HotelIcon /> : <LoyaltyIcon />}</ListItemIcon>
             <Link href={`${slug}`}>
                   <a className={clsx(classes.aTag, currentSlug===`/${slug}`? classes.active: '')}>{title}</a>
                 </Link>

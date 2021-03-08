@@ -82,7 +82,7 @@ function App({ Component, pageProps }) {
           rel="stylesheet"
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
         />
-        <link rel="icon" href="/travel-case.svg" />
+        <link rel="icon" href="/yeuvivulogo.svg" />
       </Head>
       <StylesProvider injectFirst>
         <DefaultSeo {...SEO} />
