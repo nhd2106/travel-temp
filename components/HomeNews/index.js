@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Link from 'next/link';
 import styled from "styled-components";
 import faker from "faker/locale/en";
 import _ from "lodash";
@@ -39,11 +40,14 @@ const Homenews = styled.div`
     padding-bottom: 1rem;
     margin: 1rem 0;
     border-bottom: 1px solid #eee;
-    
+    img {
+      border-radius: 4px;
+    }
   }
   .isfloating {
     position: fixed;
-    top: 10%;
+    top: 15%;
+    bottom: 10%
   }
   .item_desc {
     overflow: hidden;
@@ -83,7 +87,9 @@ const HomeNews = (props) => {
           </div>
           <div className="news_list">
             {_.map(samples, ({ image, title, sentences }, id) => (
-              <div className="news_item ">
+              <Link href="/">
+                <a>
+                <div className="news_item " key={id}>
                 <h3>{title}</h3>
                 <Grid container spacing={2}>
                   <Grid  item xs={4} sm={3}>
@@ -95,6 +101,8 @@ const HomeNews = (props) => {
                   </Grid>
                 </Grid>
               </div>
+                </a>
+              </Link>
             ))}
           </div>
         </Grid>

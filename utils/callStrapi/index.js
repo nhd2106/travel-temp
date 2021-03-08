@@ -2,9 +2,10 @@ import axios from "axios";
 
 const { API_URL } = process.env;
 
-export const fetchStrapi = (endUrl) => {
+export const fetchStrapi = (method, endUrl, data) => {
   return axios.request({
-    method: "GET",
+    method: method,
     url: `${API_URL}/${endUrl}`,
+    data
   });
 };

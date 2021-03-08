@@ -40,6 +40,7 @@ const SignInStyles = styled.div`
 import { SignInWithGoogle, auth } from '../../utils/firebase/firebase.utils';
 import { signInHandler } from '../../redux/actions/user';
 import { useDispatch } from 'react-redux';
+import { set } from 'lodash';
 
 
 
@@ -56,19 +57,25 @@ export default function SignIn() {
     const router = useRouter();
     const [user, setUser ] = useState(null);
     const dispatch = useDispatch()
-    useEffect(() => {
-        auth.onAuthStateChanged(user => {
-          setUser(user);
-          if(user) {
-            dispatch(signInHandler(user));
-            window.localStorage.setItem('user', JSON.stringify(user));
-          }
-        })
-      }, [user])
-    const classes = useStyles();
-    const handleSign = async (mode) => {
-        await SignInWithGoogle();
-        router.push('/');
+    // useEffect(() => {
+    //     auth.onAuthStateChanged(user => {
+    //       setUser(user);
+    //       if(user) {
+    //         dispatch(signInHandler(user));
+    //         window.localStorage.setItem('user', JSON.stringify(user));
+    //       }
+    //     })
+    //   }, [user])
+    // const classes = useStyles();
+    const handleSignIn =  (mode) => {
+         dispatch(signInHandler(user));
+    }
+    const handleChange = (e) => {
+      const { name, value } = e.target
+      setUser((prev) => ({
+        ...prev,
+        [name]: value
+      }))
     }
     return (
         <>
@@ -81,12 +88,14 @@ export default function SignIn() {
                         <h5>Đăng nhập</h5>
                     </div>
                     <div className='form-wraper'>
-                        <form className='top-sign-in'>
-                        <TextField  style={{ marginBottom: '20px' }} id="outlined-basic " label="Tên người dùng" variant="outlined" />
-                        <TextField style={{ marginBottom: '20px' }} id="outlined-basic" label="Mật khẩu" variant="outlined" />
+                        <form className='top-sign-in' onChange={(e) => { 
+                          handleChange(e)
+                        }}>
+                        <TextField  style={{ marginBottom: '20px' }} id="user" name="identifier" label="Tên người dùng" variant="outlined" />
+                        <TextField style={{ marginBottom: '20px' }} id="password" name="password" type="password" label="Mật khẩu" variant="outlined" />
                         <FormControlLabel control={<Checkbox />} label="Ghi nhớ đăng nhập"/>
-                        <Button on style={{width:'100%',background: '#3B8AD9', color: 'white', marginBottom: '1rem'}}>Đăng nhập</Button>
-                        <Button onClick={() => handleSign('goole')} style={{width:'100%',background: 'red', color: 'white'}}>Đăng nhập với google</Button>
+                        <Button onClick={() => handleSignIn()} on style={{width:'100%',background: '#3B8AD9', color: 'white', marginBottom: '1rem'}}>Đăng nhập</Button>
+                        <Button onClick={() => handleSignIn()} style={{width:'100%',background: 'red', color: 'white'}}>Đăng nhập với google</Button>
                         </form>
                     </div>
                 </SignInStyles>

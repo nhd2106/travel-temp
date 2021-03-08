@@ -7,6 +7,14 @@ import Carousel from "../components/Carousel";
 import Promotions from '../components/Promotions';
 import TopNews from '../components/TopNews';
 import HomeNews from '../components/HomeNews';
+import axios from 'axios';
+
+// const { data } = await axios.post('http://localhost:1337/auth/local', {
+//   identifier: 'admin@gmail.com',
+//   password: 'admin123123',
+// });
+
+// console.log(data);
 
 const HotelTypes = styled.div`
   ul {

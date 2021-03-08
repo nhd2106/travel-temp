@@ -1,6 +1,7 @@
 import { put, takeLatest, all, call } from "redux-saga/effects";
 
 import { USER } from "../constants";
+import { fetchStrapi } from '../../utils/callStrapi';
 
 function* updateUser({ user }) {
   try {
@@ -8,6 +9,21 @@ function* updateUser({ user }) {
       type: USER.update,
       user,
     });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function* loginUser({ user }) {
+  try {
+    const { data } = yield call(fetchStrapi, 
+      'post',
+      `auth/local`,
+      {...user}
+      );
+    const { jwt, ...rest} = data;
+    window.localStorage.setItem('jwt', JSON.stringify(jwt));
+    yield* updateUser(rest);
   } catch (error) {
     console.log(error);
   }
@@ -24,7 +40,7 @@ export const signOutHandler = () => ({
 
 export default function* saga() {
   yield all([
-    yield takeLatest(USER.signin, updateUser),
+    yield takeLatest(USER.signin, loginUser),
     yield takeLatest(USER.signOut, updateUser),
   ]);
 }
