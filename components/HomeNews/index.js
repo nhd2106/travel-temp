@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import Link from 'next/link';
 import styled from "styled-components";
 import faker from "faker/locale/en";
 import _ from "lodash";
-import { Grid, Hidden } from "@material-ui/core";
-
+import {
+  Typography,
+  Button,
+  Grid,
+  Hidden, } from "@material-ui/core";
 const Homenews = styled.div`
 
   margin-top: 1rem;
@@ -57,6 +61,7 @@ const Homenews = styled.div`
 `;
 
 const HomeNews = (props) => {
+  
   const samples = {};
   [...Array(19).keys()].forEach(() => {
     samples[faker.random.uuid()] = {
@@ -65,6 +70,8 @@ const HomeNews = (props) => {
       sentences: faker.lorem.sentences(),
     };
   });
+  const posts = useSelector(({ blog }) => blog.posts);
+  console.log(posts)
   const [is_floating, setIs_floating] = useState(false);
   const toggleVisibility = () => {
     if (window.pageYOffset > 1500) {
@@ -77,6 +84,7 @@ const HomeNews = (props) => {
     document.addEventListener("scroll", function (e) {
       toggleVisibility();
     });
+    // dispatch(handlerGetAllPosts());
   }, []);
   return (
     <Homenews>
@@ -86,18 +94,31 @@ const HomeNews = (props) => {
             <h3>Tin dành cho bạn</h3>
           </div>
           <div className="news_list">
-            {_.map(samples, ({ image, title, sentences }, id) => (
-              <Link href="/" key={id}>
+            {_.map(posts, ({ 
+              tieuDe,
+              anhGioiThieu: {
+                url
+              },
+              slug,
+              tags,
+              published_at,
+              mota, 
+              the_loai: {
+                name
+              }
+            }, id) => (
+              <Link href="[Trang]/[post]" as={`/${name}/${slug}`} key={slug}>
                 <a>
                 <div className="news_item " >
-                <h3>{title}</h3>
+                <Hidden smUp><h3>{tieuDe}</h3></Hidden>
                 <Grid container spacing={2}>
                   <Grid  item xs={4} sm={3}>
-                    <img width="100%" src={image} alt=""  height="auto" />
+                    <img width="100%" src={`http://localhost:1337${url}`} alt=""  height="auto" />
                   </Grid>
                   <Grid item xs={8} sm={9}>
-                    <span>thời gian đăng | #nhãn</span>
-                    <p className="item_desc">{sentences}</p>
+                  <Hidden smDown><h3>{tieuDe}</h3></Hidden>
+                    <span>{published_at}| #nhãn</span>
+                    <p className="item_desc">{mota}</p>
                   </Grid>
                 </Grid>
               </div>

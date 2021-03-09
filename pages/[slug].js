@@ -69,13 +69,13 @@ export default function Post() {
   const router = useRouter();
   const dispatch = useDispatch();
   const { slug, Trang } = router.query;
+  console.log(router.query)
   const postDetails = useSelector(({ blog }) => blog.postDetails);
   const tieuDe = postDetails ? postDetails.tieuDe : "";
   const { url } = postDetails && postDetails.og_image ? postDetails.og_image : "";
   useEffect(() => {
-    const theLoai = Trang;
-    if(theLoai && slug) {
-      dispatch(handlerGetPostDetails(slug, theLoai));
+    if(slug) {
+      dispatch(handlerGetPostDetails(slug));
     }
   }, [slug, Trang]);
   const render = useMemo(() => {

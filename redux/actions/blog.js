@@ -7,17 +7,25 @@ import {
 } from '../../libs/backend';
 
 
-export function* queryPosts  () {
+export function* queryPosts  ({ the_loai }) {
   try {
-    const { posts } = yield graphQLCaller(`query {
-      posts {
-        title,
-        where,
-        shortDesc,
-        og_image {
+    const { baiViets: posts } = yield graphQLCaller(`query {
+      baiViets(where:{ the_loai: {
+        name: "${the_loai}"
+      }}) {
+        tieuDe,
+        anhGioiThieu {
           url
         },
-        slug
+        tags {
+          tagName
+        },
+        mien{
+          ten
+        }
+        published_at,
+        slug,
+        mota
       }
     }`)
     yield put({
@@ -27,8 +35,39 @@ export function* queryPosts  () {
   } catch (error) {
     console.log(error)
   }
-  
 }
+export function* queryAllPosts  () {
+  try {
+    const { baiViets: posts } = yield graphQLCaller(` query {
+      baiViets {
+        tieuDe,
+        anhGioiThieu {
+          url
+        },
+        tags {
+          tagName
+        },
+        mien{
+          ten
+        }
+        published_at,
+        slug,
+        mota,
+        the_loai {
+          name
+        }
+      }
+    }`)
+    yield put({
+      type: BLOG.update,
+      posts,
+    });
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
 
 export function* queryPostDetail({ slug }) {
   try {
@@ -59,8 +98,12 @@ export function* queryPostDetail({ slug }) {
 
 
 
-export const handlerGetPosts = () => ({
+export const handlerGetPosts = (the_loai) => ({
   type: BLOG.handlers.get,
+  the_loai
+});
+export const handlerGetAllPosts = () => ({
+  type: BLOG.handlers.getAll,
 });
 export const handlerGetPostDetails = (slug) => ({
   type: BLOG.handlers.getDetails,
@@ -70,6 +113,7 @@ export const handlerGetPostDetails = (slug) => ({
 export default function* saga() {
   yield all([
     yield takeLatest(BLOG.handlers.get, queryPosts),
+    yield takeLatest(BLOG.handlers.getAll, queryAllPosts),
     yield takeLatest(BLOG.handlers.getDetails, queryPostDetail),
   ]);
 }

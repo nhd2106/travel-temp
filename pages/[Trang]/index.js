@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useState, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import styled from "styled-components";
@@ -11,9 +11,12 @@ import {
   Typography,
   Button,
   Grid,
-  Hidden
+  Hidden,
 } from "@material-ui/core";
 import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+
+import { handlerGetPosts } from "../../redux/actions/blog";
+
 
 const Wrapper = styled.div`
     .titleNBreadCrumbs {
@@ -55,13 +58,11 @@ const Trang = (props) => {
       slug: faker.lorem.slug()
     };
   });
-  console.log(samples);
   const classes = useStyles()
   const router = useRouter();
   const title = router.query ? pageTitleMapping[router.query.Trang] : "";
   const handleTag = (mien) => {
     const { query } = router;
-    console.log(router.query);
     router.push(`/${query.Trang}?where=${mien}`)
   }
   const [is_floating, setIs_floating] = useState(false);
@@ -77,6 +78,13 @@ const Trang = (props) => {
       toggleVisibility();
     });
   }, []);
+  const posts = useSelector(({ blog }) => blog.posts);
+  const dispatch = useDispatch();
+  const the_loai = router.query.Trang
+  useEffect(() => {
+    if(the_loai) dispatch(handlerGetPosts(the_loai));
+  }, [the_loai]);
+
   return (
     <Wrapper className="container">
       <div className="titleNBreadCrumbs">                     
@@ -100,9 +108,16 @@ const Trang = (props) => {
               Nam
             </Button>
         </div>
-        <div>
-          TOP
-        </div>
+        <Grid container spacing={2}>
+          <Grid  container item md={12} spacing={2}>
+              <Grid item md={12} sm={12} xs={12}>
+
+              </Grid>
+          </Grid>
+          <Grid container item md={12}>
+
+          </Grid>
+        </Grid>
         <div>
         <Grid container spacing={2}>
         <Grid item sm={9} xs={12}>
@@ -110,8 +125,39 @@ const Trang = (props) => {
             <h3>Tin dành cho bạn</h3>
           </div>
           <div className="news_list">
-            {_.map(samples, ({ image, title, sentences, slug }, id) => (
-              <Link href="[Trang]/[post]" as={`${router.query.Trang}/${slug}`} key={id}>
+            {posts && posts.length ? posts.map(({
+          tieuDe,
+          anhGioiThieu: {
+            url
+          },
+          slug,
+          tags,
+          published_at,
+          mota
+        }) => {
+          console.log(tieuDe)
+          return (
+            <Link href="[Trang]/[post]" as={`${router.query.Trang}/${slug}`} key={slug}>
+                <a>
+                <div className="news_item " >
+                <Hidden smUp><h3>{tieuDe}</h3></Hidden>
+                <Grid container spacing={2}>
+                  <Grid  item xs={4} sm={3}>
+                    <img width="100%" src={`http://localhost:1337${url}`} alt=""  height="auto" />
+                  </Grid>
+                  <Grid item xs={8} sm={9}>
+                  <Hidden smDown><h3>{tieuDe}</h3></Hidden>
+                    <span>{published_at}| #nhãn</span>
+                    <p className="item_desc">{mota}</p>
+                  </Grid>
+                </Grid>
+              </div>
+                </a>
+              </Link>
+          )
+        }) : null}
+            {/* {_.map(samples, ({ image, title, sentences, slug }, id) => (
+              <Link href="[Trang]/[post]" as={`${router.query.Trang}/${slug}`} key={slug}>
                 <a>
                 <div className="news_item " >
                 <h3>{title}</h3>
@@ -127,7 +173,7 @@ const Trang = (props) => {
               </div>
                 </a>
               </Link>
-            ))}
+            ))} */}
           </div>
         </Grid>
         <Hidden smDown>

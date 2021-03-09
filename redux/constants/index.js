@@ -29,6 +29,7 @@ export const USER = {
 export const BLOG = {
   handlers: {
     get: "BLOG_GET_HANDLER",
+    getAll: "BLOG_GET_ALL_HANDLER",
     getDetails: "BLOG_GETDETAILS_HANDLER",
   },
   update: "BLOG_UPDATE",

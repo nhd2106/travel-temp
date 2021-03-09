@@ -56,17 +56,7 @@ const useStyles = makeStyles({
 export default function SignIn() {
     const router = useRouter();
     const [user, setUser ] = useState(null);
-    const dispatch = useDispatch()
-    // useEffect(() => {
-    //     auth.onAuthStateChanged(user => {
-    //       setUser(user);
-    //       if(user) {
-    //         dispatch(signInHandler(user));
-    //         window.localStorage.setItem('user', JSON.stringify(user));
-    //       }
-    //     })
-    //   }, [user])
-    // const classes = useStyles();
+    const dispatch = useDispatch();
     const handleSignIn =  (mode) => {
           const SignInSucess = () => {
             router.push('/admin')

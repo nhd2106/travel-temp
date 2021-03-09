@@ -1,55 +1,26 @@
 import Head from "next/head";
 import Link from "next/link";
-import styled from 'styled-components';
-import styles from "../styles/Home.module.css";
-import Destinations from "../components/Destinations";
-import Carousel from "../components/Carousel";
-import Promotions from '../components/Promotions';
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+
+import {
+  Typography,
+  Button,
+  Grid,
+  Hidden,
+} from "@material-ui/core";
+
 import TopNews from '../components/TopNews';
 import HomeNews from '../components/HomeNews';
-import axios from 'axios';
+import { handlerGetAllPosts } from "../redux/actions/blog";
 
-// const { data } = await axios.post('http://localhost:1337/auth/local', {
-//   identifier: 'admin@gmail.com',
-//   password: 'admin123123',
-// });
-
-// console.log(data);
-
-const HotelTypes = styled.div`
-  ul {
-    list-style: none;
-    padding-inline-start: unset;
-  }
-  a {
-    color: black;
-    text-decoration: none;
-    text-align: center;
-  }
-  .wrapper {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 1rem;
-    span {
-      font-weight: bold;
-    }
-  }
-  img {
-    width: 100%;
-    border-radius: 1rem;
-  }
-  span {
-    font-size: calc(1vw + 0.8rem);
-  }
-  @media screen and (max-width: 599px) {
-    .wrapper {
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-
-    }
-  }
-`;
 
 export default function Home() {
+  const posts = useSelector(({ blog }) => blog.posts);
+  const dispatch = useDispatch();
+  useEffect(() => {
+     dispatch(handlerGetAllPosts());
+  }, []);
   return (
     <div>
       <Head>
@@ -57,7 +28,7 @@ export default function Home() {
         <meta name="keywords" content="Yêu Vivu, đặt phòng khách sạn, chuyên voucher resort, voucher villa, voucer khách sạn" />
         <meta name="author" content="Yêu vivu || đặt phòng khách sạn, book phòng, săn voucher, voucher siêu giảm giá" />
       </Head>
-      <section style={{ width: "80%", margin: 'auto' }}>
+      <section className="container">
         {/* <div className={styles.carousel}>
         </div> */}
         {/* <Carousel /> */}
