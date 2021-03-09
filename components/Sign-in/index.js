@@ -68,7 +68,10 @@ export default function SignIn() {
     //   }, [user])
     // const classes = useStyles();
     const handleSignIn =  (mode) => {
-         dispatch(signInHandler(user));
+          const SignInSucess = () => {
+            router.push('/admin')
+          }
+         dispatch(signInHandler(user, SignInSucess));
     }
     const handleChange = (e) => {
       const { name, value } = e.target

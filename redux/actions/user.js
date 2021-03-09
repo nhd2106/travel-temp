@@ -14,7 +14,7 @@ function* updateUser({ user }) {
   }
 }
 
-function* loginUser({ user }) {
+function* loginUser({ user, onSuccess }) {
   try {
     const { data } = yield call(fetchStrapi, 
       'post',
@@ -24,14 +24,16 @@ function* loginUser({ user }) {
     const { jwt, ...rest} = data;
     window.localStorage.setItem('jwt', JSON.stringify(jwt));
     yield* updateUser(rest);
+    yield onSuccess();
   } catch (error) {
     console.log(error);
   }
 }
 
-export const signInHandler = (user) => ({
+export const signInHandler = (user, onSuccess) => ({
   type: USER.signin,
-  user
+  user,
+  onSuccess,
 });
 export const signOutHandler = () => ({
   type: USER.signOut,
