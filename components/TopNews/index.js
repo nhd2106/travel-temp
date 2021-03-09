@@ -26,7 +26,7 @@ const Topnews = (props) => {
         <>
             <Wrapper>
                 <Grid container spacing={2}>
-                    <Grid className="top-news" item xs={12} sm={6}>
+                    <Grid className="top-news" item xs={12} sm={6} md={6}>
                         <div >
                             <img width="100%" src="https://cdn.shortpixel.ai/client/q_glossy,ret_img,w_850/https://gauoi.vn/wp-content/uploads/2021/03/banhcanhnampho.jpg" />
                             <h1> lorem ipsum dolor sit amet, consectetur lorem ipsum lorem ipsum</h1>
@@ -46,7 +46,7 @@ const Topnews = (props) => {
                             </ul>
                         </div>
                     </Grid>
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={12} sm={6} md={3}>
                         <div className="flex rightNews">
                             <div className="flex rightNews__item">
                                 <div>
@@ -99,8 +99,8 @@ const Topnews = (props) => {
 
                         </div>
                     </Grid>
-                    <Hidden smDown>
-                        <Grid item xs={12} sm={3}>
+                    <Hidden only={['sm', 'xs']}>
+                        <Grid item xs={12} sm={3} md={3}>
                             <div className="right_topBanner" style={{
                                 backgroundColor: '#FFCC00',
                                 width: 300,

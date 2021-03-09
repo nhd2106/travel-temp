@@ -11,7 +11,7 @@ body {
   position: relative;
 }
 ::after, ::before {
-  box-sizing: inherit;
+  box-sizing: border-box;
 }
 a {
   color: inherit;
@@ -53,4 +53,9 @@ a {
 }
 #__next{
   background-color: #fafafa;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
 }

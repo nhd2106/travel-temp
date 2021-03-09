@@ -87,9 +87,9 @@ const HomeNews = (props) => {
           </div>
           <div className="news_list">
             {_.map(samples, ({ image, title, sentences }, id) => (
-              <Link href="/">
+              <Link href="/" key={id}>
                 <a>
-                <div className="news_item " key={id}>
+                <div className="news_item " >
                 <h3>{title}</h3>
                 <Grid container spacing={2}>
                   <Grid  item xs={4} sm={3}>

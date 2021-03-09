@@ -86,7 +86,7 @@ export default function LienHe(props) {
                 <Input
                   style={{ width: "80%" }}
                   id="name"
-                  aria-describedby="my-helper-text"
+                  
                 />
               </FormControl>
               <FormControl>
@@ -94,7 +94,7 @@ export default function LienHe(props) {
                 <Input
                   style={{ width: "80%" }}
                   id="number"
-                  aria-describedby="my-helper-text"
+                  
                 />
               </FormControl>
               <FormControl>
@@ -102,7 +102,7 @@ export default function LienHe(props) {
                 <Input
                   style={{ width: "80%" }}
                   id="email"
-                  aria-describedby="my-helper-text"
+                  
                 />
               </FormControl>
               <FormControl>
@@ -131,7 +131,7 @@ export default function LienHe(props) {
                 <Input
                  
                   id="name"
-                  aria-describedby="my-helper-text"
+                  
                 />
               </FormControl>
               <FormControl>
@@ -139,7 +139,7 @@ export default function LienHe(props) {
                 <Input
                  
                   id="number"
-                  aria-describedby="my-helper-text"
+                  
                 />
               </FormControl>
               <FormControl>
@@ -147,7 +147,7 @@ export default function LienHe(props) {
                 <Input
                  
                   id="email"
-                  aria-describedby="my-helper-text"
+                  
                 />
               </FormControl>
               <FormControl>
@@ -155,7 +155,7 @@ export default function LienHe(props) {
                 <Input
                  
                   id="content"
-                  aria-describedby="my-helper-text"
+                  
                 />
               </FormControl>
               <FormControl className="button-submit">

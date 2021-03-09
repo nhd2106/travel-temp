@@ -138,15 +138,15 @@ export default function DNavbar({ navigations }) {
             >
               <Grid item lg={9}>
                 {[
-                  { title: "Điểm đến", slug: "/hotels" },
-                  { title: "Ẩm thực", slug: "/dia-diem" },
-                  { title: "Lịch trình", slug: "/trai-nghiem" },
-                  { title: "Riview", slug: "/lien-he" },
-                  { title: "Giảm giá", slug: "/lien-he" },
+                  { title: "Điểm đến", slug: "/diem-den" },
+                  { title: "Ẩm thực", slug: "/am-thuc" },
+                  { title: "Lịch trình", slug: "/lich-trinh" },
+                  { title: "Riview", slug: "/review" },
+                  { title: "Giảm giá", slug: "/giam-gia" },
                 ].map(({ title, slug }) => {
                   return (
                     <Hidden smDown key={slug}>
-                      <Link href={`${slug}`}>
+                      <Link href='/[Trang]' as={`${slug}`}>
                         <a
                           className={clsx(`${classes.linkMargin} `, {
                             active: currentSlug === `/${slug}`,
