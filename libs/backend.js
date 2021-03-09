@@ -6,7 +6,6 @@ import {
 
 
 export const graphQLCaller = (query, variables) => new Promise((resolve, reject) => {
-  console.log(typeof(query))
     axios.post(`${BACKEND()}/graphql`, {
       query,
       variables,

@@ -43,15 +43,6 @@ export default function DDrawer({ open, toggleDrawer, navigations }) {
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
-      {/* <List>
-        {navigations.map(({ Title, Slug }, index) => (
-          <ListItem button key={Slug}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={Title} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider /> */}
       <List>
       <ListItem >
             <ListItemIcon></ListItemIcon>
@@ -59,15 +50,15 @@ export default function DDrawer({ open, toggleDrawer, navigations }) {
                   <a style={{color: 'black'}}><h4>Yêu vivu</h4></a>
                 </Link>
           </ListItem>
-      {[
-          { title: "Khách sạn", slug: '/hotels'},
-          { title: "Địa điểm", slug: '/dia-diem'},
-          { title: "Trải nghiệm", slug: '/trai-nghiem'},
-          { title: "Liên hệ", slug: '/lien-he'},
+      {[{ title: "Điểm đến", slug: "/diem-den" },
+                  { title: "Ẩm thực", slug: "/am-thuc" },
+                  { title: "Lịch trình", slug: "/lich-trinh" },
+                  { title: "Riview", slug: "/review" },
+                  { title: "Giảm giá", slug: "/giam-gia" },
       ].map(({ title, slug }, index) => (
           <ListItem button key={slug}>
             <ListItemIcon style={{color: 'black'}}>{index % 2 === 0 ? <HotelIcon /> : <LoyaltyIcon />}</ListItemIcon>
-            <Link href={`${slug}`}>
+            <Link  href='/[Trang]' as={`${slug}`}>
                   <a className={clsx(classes.aTag, currentSlug===`/${slug}`? classes.active: '')}>{title}</a>
                 </Link>
           </ListItem>

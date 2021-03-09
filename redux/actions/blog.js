@@ -32,13 +32,20 @@ export function* queryPosts  () {
 
 export function* queryPostDetail({ slug }) {
   try {
-    const { posts: postDetails } = yield graphQLCaller(`query{
-      posts(where:{ slug: "${slug}" }) {
-        og_image{
+    const { baiViets: postDetails } = yield graphQLCaller(`query{
+      baiViets(where:{ slug: "${slug}" }) {
+        tieuDe,
+        anhGioiThieu {
           url
         },
-        content,
-        title,
+        tags {
+          tagName
+        },
+        mien{
+          ten
+        }
+        noiDung,
+        published_at,
       }
     }`);
     yield put({
