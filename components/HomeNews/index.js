@@ -71,20 +71,19 @@ const HomeNews = (props) => {
     };
   });
   const posts = useSelector(({ blog }) => blog.posts);
-  console.log(posts)
   const [is_floating, setIs_floating] = useState(false);
   const toggleVisibility = () => {
-    if (window.pageYOffset > 1500) {
+    if (window.pageYOffset > 1500 && window.pageXOffset > -500) {
       setIs_floating(true);
     } else {
       setIs_floating(false);
     }
   };
+  console.log(is_floating);
   useEffect(() => {
     document.addEventListener("scroll", function (e) {
       toggleVisibility();
     });
-    // dispatch(handlerGetAllPosts());
   }, []);
   return (
     <Homenews>
@@ -94,7 +93,7 @@ const HomeNews = (props) => {
             <h3>Tin dành cho bạn</h3>
           </div>
           <div className="news_list">
-            {_.map(posts, ({ 
+            {posts && posts.length ? _.map(posts, ({ 
               tieuDe,
               anhGioiThieu: {
                 url
@@ -103,28 +102,37 @@ const HomeNews = (props) => {
               tags,
               published_at,
               mota, 
-              the_loai: {
-                name
-              }
-            }, id) => (
-              <Link href="[Trang]/[post]" as={`/${name}/${slug}`} key={slug}>
-                <a>
-                <div className="news_item " >
-                <Hidden smUp><h3>{tieuDe}</h3></Hidden>
-                <Grid container spacing={2}>
-                  <Grid  item xs={4} sm={3}>
-                    <img width="100%" src={`http://localhost:1337${url}`} alt=""  height="auto" />
+              the_loai
+            }) => {
+              const { name } = the_loai || '';
+              return (
+                <Link href="[Trang]/[post]" as={`/${name}/${slug}`} key={slug}>
+                  <a>
+                  <div className="news_item " >
+                  <Hidden smUp><h3>{tieuDe}</h3></Hidden>
+                  <Grid container spacing={2}>
+                    <Grid  item xs={4} sm={3}>
+                      <img width="100%" src={`http://localhost:1337${url}`} alt=""  height="auto" />
+                    </Grid>
+                    <Grid item xs={8} sm={9}>
+                    <Hidden smDown><h3>{tieuDe}</h3></Hidden>
+                      <span>{published_at}| {
+                        tags ? tags.map(({ tagName }, id) => <Link key={id} href="/"><a style={{
+                          fontWeight: '500',
+                          marginRight: '4px',
+                          color: 'grey',
+                          fontSize: '12px'
+                        }}>#{tagName}</a></Link>)
+                       : null
+                      }</span>
+                      <p className="item_desc">{mota}</p>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={8} sm={9}>
-                  <Hidden smDown><h3>{tieuDe}</h3></Hidden>
-                    <span>{published_at}| #nhãn</span>
-                    <p className="item_desc">{mota}</p>
-                  </Grid>
-                </Grid>
-              </div>
-                </a>
-              </Link>
-            ))}
+                </div>
+                  </a>
+                </Link>
+              )
+            }) : null}
           </div>
         </Grid>
         <Hidden smDown>

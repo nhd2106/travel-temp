@@ -7,31 +7,64 @@ import {
 } from '../../libs/backend';
 
 
-export function* queryPosts  ({ the_loai }) {
+export function* queryPosts  ({ the_loai, where }) {
   try {
-    const { baiViets: posts } = yield graphQLCaller(`query {
-      baiViets(where:{ the_loai: {
-        name: "${the_loai}"
-      }}) {
-        tieuDe,
-        anhGioiThieu {
-          url
-        },
-        tags {
-          tagName
-        },
-        mien{
-          ten
+    if (where) {
+      console.log('called', where)
+      const { baiViets: posts } = yield graphQLCaller(`query {
+        baiViets(
+          where:{
+            the_loai: {
+                 name: "${the_loai}"
+            },
+            mien: {
+              ten: "${where}"
+            }
+          }) {
+          tieuDe,
+          anhGioiThieu {
+            url
+          },
+          tags {
+            tagName
+          },
+          mien{
+            ten
+          }
+          published_at,
+          slug,
+          mota
         }
-        published_at,
-        slug,
-        mota
-      }
-    }`)
-    yield put({
-      type: BLOG.update,
-      posts,
-    });
+      }`)
+      yield put({
+        type: BLOG.update,
+        posts,
+      });
+    } else { console.log('lskdflksdjf')
+      const { baiViets: posts } = yield graphQLCaller(`query {
+        baiViets(where:{ the_loai: {
+          name: "${the_loai}"
+        }}) {
+          tieuDe,
+          anhGioiThieu {
+            url
+          },
+          tags {
+            tagName
+          },
+          mien{
+            ten
+          }
+          published_at,
+          slug,
+          mota
+        }
+      }`)
+      yield put({
+        type: BLOG.update,
+        posts,
+      });
+    }
   } catch (error) {
     console.log(error)
   }
@@ -49,7 +82,7 @@ export function* queryAllPosts  () {
         },
         mien{
           ten
-        }
+        },
         published_at,
         slug,
         mota,
@@ -98,9 +131,10 @@ export function* queryPostDetail({ slug }) {
 
 
 
-export const handlerGetPosts = (the_loai) => ({
+export const handlerGetPosts = (the_loai, where) => ({
   type: BLOG.handlers.get,
-  the_loai
+  the_loai,
+  where
 });
 export const handlerGetAllPosts = () => ({
   type: BLOG.handlers.getAll,

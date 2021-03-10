@@ -81,9 +81,10 @@ const Trang = (props) => {
   const posts = useSelector(({ blog }) => blog.posts);
   const dispatch = useDispatch();
   const the_loai = router.query.Trang
+  const where = router.query.where
   useEffect(() => {
-    if(the_loai) dispatch(handlerGetPosts(the_loai));
-  }, [the_loai]);
+    if(the_loai) dispatch(handlerGetPosts(the_loai, where));
+  }, [the_loai, where]);
 
   return (
     <Wrapper className="container">
@@ -147,7 +148,15 @@ const Trang = (props) => {
                   </Grid>
                   <Grid item xs={8} sm={9}>
                   <Hidden smDown><h3>{tieuDe}</h3></Hidden>
-                    <span>{published_at}| #nhãn</span>
+                    <span>{published_at} | {
+                        tags ? tags.map(({ tagName }, id) => <Link key={id} href="/"><a style={{
+                          fontWeight: '500',
+                          marginRight: '4px',
+                          color: 'grey',
+                          fontSize: '12px'
+                        }}>#{tagName}</a></Link>)
+                       : null
+                      }</span>
                     <p className="item_desc">{mota}</p>
                   </Grid>
                 </Grid>

@@ -68,7 +68,10 @@ a {
 }
 @media (min-width: 1201px ) {
   .container {
-    width: 60%;
+    width: 50%;
     margin: auto;
   }
+}
+img {
+  border-radius: 8px;
 }
