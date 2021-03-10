@@ -106,7 +106,7 @@ export default function Post() {
           </BlogCover>
         ) : null}
         <div className="post_info">
-          <h3>{tieuDe}</h3>
+          <h1>{tieuDe}</h1>
           <div>
             {postDetails && postDetails.tags ? (
               postDetails.tags.map(({ tagName }, id) => <Link key={id} href="/"><a style={{

@@ -136,7 +136,6 @@ const Trang = (props) => {
           published_at,
           mota
         }) => {
-          console.log(tieuDe)
           return (
             <Link href="[Trang]/[post]" as={`${router.query.Trang}/${slug}`} key={slug}>
                 <a>
