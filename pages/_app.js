@@ -83,7 +83,7 @@ function App({ Component, pageProps }) {
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
         />
         <link rel="icon" href="/yeuvivulogo.svg" />
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"/> 
+        {/* <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"/>  */}
       </Head>
       <StylesProvider injectFirst>
         <DefaultSeo {...SEO} />
