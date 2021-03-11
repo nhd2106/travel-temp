@@ -76,13 +76,13 @@ const HomeNews = (props) => {
   const posts = useSelector(({ blog }) => blog.posts);
   const [is_floating, setIs_floating] = useState(false);
   const toggleVisibility = () => {
-    if (window.pageYOffset > 1500 && window.pageXOffset > -500) {
+    if (window.pageYOffset > 1500 && window.pageYOffset < -10) {
       setIs_floating(true);
     } else {
       setIs_floating(false);
     }
   };
-  console.log(is_floating);
+  console.log(posts)
   useEffect(() => {
     document.addEventListener("scroll", function (e) {
       toggleVisibility();

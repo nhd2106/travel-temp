@@ -94,7 +94,7 @@ export default function DNavbar({ navigations }) {
     <>
       <AppBar position="sticky" style={{ background: "white" }}>
         <Toolbar>
-          <Hidden smUp>
+          <Hidden mdUp>
             <IconButton
               onClick={toggleDrawer(true)}
               edge="start"
