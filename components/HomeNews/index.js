@@ -9,6 +9,8 @@ import {
   Button,
   Grid,
   Hidden, } from "@material-ui/core";
+import { BACKEND } from '../../libs/config';
+
 const Homenews = styled.div`
 
   margin-top: 1rem;
@@ -61,6 +63,7 @@ const Homenews = styled.div`
 `;
 
 const HomeNews = (props) => {
+  const baseUrl = BACKEND();
   
   const samples = {};
   [...Array(19).keys()].forEach(() => {
@@ -108,15 +111,16 @@ const HomeNews = (props) => {
               return (
                 <Link href="[Trang]/[post]" as={`/${name}/${slug}`} key={slug}>
                   <a>
-                  <div className="news_item " >
+                    <span>
+                    <div className="news_item " >
                   <Hidden smUp><h3>{tieuDe}</h3></Hidden>
                   <Grid container spacing={2}>
                     <Grid  item xs={4} sm={3}>
-                      <img width="100%" src={`http://localhost:1337${url}`} alt=""  height="auto" />
+                      <img width="100%" src={`${baseUrl}${url}`} alt=""  height="auto" />
                     </Grid>
                     <Grid item xs={8} sm={9}>
                     <Hidden smDown><h3>{tieuDe}</h3></Hidden>
-                      <span>{published_at}| {
+                      {/* <span>{published_at}| {
                         tags ? tags.map(({ tagName }, id) => <Link key={id} href="/"><a style={{
                           fontWeight: '500',
                           marginRight: '4px',
@@ -124,11 +128,12 @@ const HomeNews = (props) => {
                           fontSize: '12px'
                         }}>#{tagName}</a></Link>)
                        : null
-                      }</span>
+                      }</span> */}
                       <p className="item_desc">{mota}</p>
                     </Grid>
                   </Grid>
                 </div>
+                    </span>
                   </a>
                 </Link>
               )

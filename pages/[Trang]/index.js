@@ -5,6 +5,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import faker from "faker/locale/en";
 import _ from 'lodash';
+import { BACKEND } from '../../libs/config';
 
 import {
   Breadcrumbs,
@@ -49,6 +50,7 @@ const pageTitleMapping = {
 };
 
 const Trang = (props) => {
+  const baseUrl = BACKEND()
   const samples = {};
   [...Array(19).keys()].forEach(() => {
     samples[faker.random.uuid()] = {
@@ -143,7 +145,7 @@ const Trang = (props) => {
                 <Hidden smUp><h3>{tieuDe}</h3></Hidden>
                 <Grid container spacing={2}>
                   <Grid  item xs={4} sm={3}>
-                    <img width="100%" src={`http://localhost:1337${url}`} alt=""  height="auto" />
+                    <img width="100%" src={`${baseUrl}${url}`} alt=""  height="auto" />
                   </Grid>
                   <Grid item xs={8} sm={9}>
                   <Hidden smDown><h3>{tieuDe}</h3></Hidden>

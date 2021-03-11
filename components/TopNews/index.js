@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Grid, Hidden } from "@material-ui/core";
 
+import { BACKEND } from '../../libs/config';
+
 const Wrapper = styled.div`
   padding-bottom: 3rem;
   padding-top: 20rem;
@@ -20,6 +22,7 @@ const Wrapper = styled.div`
 `;
 
 const Topnews = (props) => {
+  const baseurl = BACKEND();
   const posts = useSelector(({ blog }) => blog.posts);
   const top4lastest = posts ? posts.slice(0, 4) : null;
   const top3lastest = posts ? posts.slice(1, 4) : null;
@@ -40,7 +43,7 @@ const Topnews = (props) => {
                     <a>
                         <img
                         width="100%"
-                        src={`http://localhost:1337${lastest.anhGioiThieu.url}`}
+                        src={`${baseurl}${lastest.anhGioiThieu.url}`}
                     />
                     <h1> {lastest.tieuDe ? lastest.tieuDe : ""}</h1>
                     <p>
@@ -94,7 +97,7 @@ const Topnews = (props) => {
                               <img
                                 width="120"
                                 height="100"
-                                src={`http://localhost:1337${url}`}
+                                src={`${baseurl}${url}`}
                               />
                             </div>
                             <p style={{fontWeight: 500, fontSize: 15}}>{tieuDe}</p>

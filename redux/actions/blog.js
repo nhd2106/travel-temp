@@ -33,14 +33,17 @@ export function* queryPosts  ({ the_loai, where }) {
           }
           published_at,
           slug,
-          mota
+          mota,
+          the_loai {
+            name
+          }
         }
       }`)
       yield put({
         type: BLOG.update,
         posts,
       });
-    } else { console.log('lskdflksdjf')
+    } else {
       const { baiViets: posts } = yield graphQLCaller(`query {
         baiViets(where:{ the_loai: {
           name: "${the_loai}"
@@ -57,7 +60,10 @@ export function* queryPosts  ({ the_loai, where }) {
           }
           published_at,
           slug,
-          mota
+          mota,
+          the_loai {
+            name
+          }
         }
       }`)
       yield put({
