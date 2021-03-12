@@ -11,6 +11,7 @@ import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import MailIcon from '@material-ui/icons/Mail';
 import Link from 'next/link';
 import HotelIcon from '@material-ui/icons/Hotel';
+import Icon from '@material-ui/core/Icon';
 import { useRouter } from 'next/router';
 
 const useStyles = makeStyles({
@@ -50,14 +51,14 @@ export default function DDrawer({ open, toggleDrawer, navigations }) {
                   <a style={{color: 'black'}}><h4>Yêu vivu</h4></a>
                 </Link>
           </ListItem>
-      {[{ title: "Điểm đến", slug: "/diem-den" },
-                  { title: "Ẩm thực", slug: "/am-thuc" },
-                  { title: "Lịch trình", slug: "/lich-trinh" },
-                  { title: "Riview", slug: "/review" },
-                  { title: "Giảm giá", slug: "/giam-gia" },
-      ].map(({ title, slug }, index) => (
+      {[{ title: "Điểm đến", slug: "/diem-den", icon: "location_on" },
+                  { title: "Ẩm thực", slug: "/am-thuc", icon: "ramen_dining" },
+                  { title: "Lịch trình", slug: "/lich-trinh", icon: "date_range" },
+                  { title: "Review", slug: "/review", icon: "rate_review" },
+                  { title: "Giảm giá", slug: "/giam-gia", icon: "sell" },
+      ].map(({ title, slug, icon }, index) => (
           <ListItem button key={slug}>
-            <ListItemIcon style={{color: 'black'}}>{index % 2 === 0 ? <HotelIcon /> : <LoyaltyIcon />}</ListItemIcon>
+            <Icon style={{color: 'black', marginRight: '1rem'}}>{icon}</Icon>
             <Link  href='/[Trang]' as={`${slug}`}>
                   <a className={clsx(classes.aTag, currentSlug===`/${slug}`? classes.active: '')}>{title}</a>
                 </Link>

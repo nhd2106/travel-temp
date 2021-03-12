@@ -26,6 +26,7 @@ import { BACKEND } from '../../libs/config';
    .post_info {
      padding: 2rem 0;
    }
+   margin-bottom: 2rem;
   `
  const BlogStyles = styled.div`
   img {
@@ -88,8 +89,9 @@ export default function Post() {
   const baseUrl = BACKEND();
   const coverUrl = url ? `${baseUrl}${url}` : "";
   const SEO = {
-    tieuDe: postDetails ? postDetails.tieuDe : '',
+    title: postDetails ? postDetails.tieuDe : '',
   };
+  // console.log(seo);
   return (
     <Wrapper className="container">
       <NextSeo {...SEO}/>

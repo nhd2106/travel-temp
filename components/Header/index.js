@@ -23,7 +23,7 @@ const NavigationsStyled = styled.div`
   }
   a {
     color: black;
-    text-transform: uppercase;
+    // text-transform: uppercase;
     font-weight: 500;
     // &:hover {
     //   text-decoration: none;
@@ -31,7 +31,7 @@ const NavigationsStyled = styled.div`
     // }
   }
   .MuiDrawer-paper {
-    background-color: "#393A44";
+    background-color: "#";
   }
   .MuiToolbar-root {
     color: black;

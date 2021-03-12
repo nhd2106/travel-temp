@@ -7,8 +7,7 @@ import { Grid, Hidden } from "@material-ui/core";
 import { BACKEND } from '../../libs/config';
 
 const Wrapper = styled.div`
-  padding-bottom: 3rem;
-  padding-top: 20rem;
+  padding: 1rem 0 3rem 0;
   .flex {
     display: flex;
     gap: 3px;
@@ -18,6 +17,13 @@ const Wrapper = styled.div`
     .rightNews__item {
       margin-bottom: 1rem;
     }
+  }
+  .groupBanner {
+    margin: 2rem 0;
+    padding: 5rem;
+    background: #FFCC00;
+    display: flex;
+    justify-content: center;
   }
 `;
 
@@ -33,6 +39,11 @@ const Topnews = (props) => {
     <>
       <Wrapper>
         <Grid container spacing={1}>
+          <Hidden smDown>
+          <Grid smDown className="groupBanner" md={12} lg={12}>
+                Group banner
+            </Grid>
+          </Hidden>
           <Grid container item xs={12} sm={12} md={9} lg={9} spacing={1}>
           <Grid className="top-news" item xs={12} sm={6} md={8} lg={8}>
             <div style={{paddingBottom: '1rem'}}>

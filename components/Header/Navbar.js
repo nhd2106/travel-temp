@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
   linkMargin: {
     marginRight: "20px",
+    display: "inline-block",
     color: "black",
     textDecoration: "none",
   },
@@ -105,17 +106,19 @@ export default function DNavbar({ navigations }) {
               <MenuIcon />
             </IconButton>
           </Hidden>
-          <Container
+          <div className="container"
             style={{
               display: "flex",
-              justifyContent: "space-between",
+              // justifyContent: "space-between",
+              alignItems: "center"
             }}
           >
             <div
               style={{
-                flex: " 1 1 40rem",
+                // flex: " 1 1 40rem",
                 display: "flex",
                 alignItems: "center",
+                marginRight: 'calc(2rem + 1vw)'
               }}
             >
               <Link href="/">
@@ -129,15 +132,11 @@ export default function DNavbar({ navigations }) {
                 </a>
               </Link>
             </div>
-            <Grid
-              container
-              style={{
-                flex: " 1, 1, 40rem",
-                alignItems: "center",
-              }}
-            >
-              <Grid item lg={9}>
-                {[
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}>
+            {[
                   { title: "Điểm đến", slug: "/diem-den" },
                   { title: "Ẩm thực", slug: "/am-thuc" },
                   { title: "Lịch trình", slug: "/lich-trinh" },
@@ -158,9 +157,8 @@ export default function DNavbar({ navigations }) {
                     </Hidden>
                   );
                 })}
-              </Grid>
-            </Grid>
-          </Container>
+            </div>
+          </div>
         </Toolbar>
       </AppBar>
       <DDrawer

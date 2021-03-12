@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 80",
     "build": "next build",
     "start": "next start"
   },
@@ -14,8 +14,6 @@
     "@tinymce/tinymce-react": "^3.9.0",
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
-    "faker": "^5.4.0",
-    "firebase": "^8.2.1",
     "lodash": "^4.17.21",
     "next": "^10.0.8",
     "next-redux-wrapper": "^6.0.2",
