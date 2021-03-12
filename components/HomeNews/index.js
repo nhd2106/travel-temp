@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Link from 'next/link';
 import styled from "styled-components";
-import faker from "faker/locale/en";
 import _ from "lodash";
 import {
   Typography,
