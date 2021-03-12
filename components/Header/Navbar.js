@@ -25,8 +25,6 @@ import { signOutHandler } from "../../redux/actions/user";
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 
-
-import { auth as googleAuth } from "../../utils/firebase/firebase.utils";
 import { Badge } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({

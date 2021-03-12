@@ -2,8 +2,6 @@ import { NextSeo } from "next-seo";
 
 import SignIn from "../components/Sign-in";
 
-import { auth } from "../utils/firebase/firebase.utils";
-
 const DangNhap = (props) => {
   const SEO = {
     title: "Đăng nhập",

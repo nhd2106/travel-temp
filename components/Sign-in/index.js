@@ -37,7 +37,6 @@ const SignInStyles = styled.div`
   }
 `;
 
-import { SignInWithGoogle, auth } from '../../utils/firebase/firebase.utils';
 import { signInHandler } from '../../redux/actions/user';
 import { useDispatch } from 'react-redux';
 import { set } from 'lodash';
