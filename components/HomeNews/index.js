@@ -64,14 +64,6 @@ const Homenews = styled.div`
 const HomeNews = (props) => {
   const baseUrl = BACKEND();
   
-  const samples = {};
-  [...Array(19).keys()].forEach(() => {
-    samples[faker.random.uuid()] = {
-      title: faker.lorem.sentence(),
-      image: faker.image.animals(),
-      sentences: faker.lorem.sentences(),
-    };
-  });
   const posts = useSelector(({ blog }) => blog.posts);
   const [is_floating, setIs_floating] = useState(false);
   const toggleVisibility = () => {

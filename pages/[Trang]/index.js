@@ -50,15 +50,6 @@ const pageTitleMapping = {
 
 const Trang = (props) => {
   const baseUrl = BACKEND()
-  const samples = {};
-  [...Array(19).keys()].forEach(() => {
-    samples[faker.random.uuid()] = {
-      title: faker.lorem.sentence(),
-      image: faker.image.animals(),
-      sentences: faker.lorem.sentences(),
-      slug: faker.lorem.slug()
-    };
-  });
   const classes = useStyles()
   const router = useRouter();
   const title = router.query ? pageTitleMapping[router.query.Trang] : "";
